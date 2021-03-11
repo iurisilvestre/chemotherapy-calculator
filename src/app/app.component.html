@@ -1,2 +1,35 @@
-<h1>Chemotherapy Calculator</h1>
-<app-patient-info></app-patient-info>
+<div>
+    <h1>Chemotherapy Calculator</h1>
+    <div class="main">
+        <div class="first-col">
+            <h3>Patient Info</h3>
+            <div>
+                <select name="" id="">
+                    <option value="">Male</option>
+                    <option value="">Female</option>
+                </select>
+                <input type="number" placeholder="Age">
+                <input type="number" placeholder="Height" [(ngModel)]="patientInfo.height">
+                <input type="number" placeholder="Weight" [(ngModel)]="patientInfo.weight">
+                <input type="number" placeholder="Creatinine">
+                <input type="number" placeholder="AUC">
+            </div>
+        </div>
+        <div class="second-col">
+            <div>
+                <h3>Chemotherapy Scheme</h3>
+                <select name="Cancer" id="">
+                    <option>Lung Cancer</option>
+                    <option>Breast Cancer</option>
+                </select>
+                <select name="Cancer" id="">
+                    <option>Paclitaxel 80mg/m2</option>
+                </select>
+                <h3>Results</h3>
+                <h4>BSA = {{getBsa(patientInfo)}}</h4>
+                <h4>Dose = {{getPaclitaxel()}}</h4>
+            </div>
+            
+        </div>
+    </div>
+</div >
