@@ -4,15 +4,15 @@
         <div class="first-col">
             <h3>Patient Info</h3>
             <div>
-                <select name="" id="">
-                    <option value="">Male</option>
-                    <option value="">Female</option>
-                </select>
-                <input type="number" placeholder="Age">
+
+                <button (click)="setGenre('male')">Male</button>
+                <button (click)="setGenre('female')">Female</button>
+                <input type="number" placeholder="Age" [(ngModel)]="patientInfo.age">
                 <input type="number" placeholder="Height" [(ngModel)]="patientInfo.height">
                 <input type="number" placeholder="Weight" [(ngModel)]="patientInfo.weight">
-                <input type="number" placeholder="Creatinine">
+                <input type="number" placeholder="Creatinine" [(ngModel)]="patientInfo.creatinine">
                 <input type="number" placeholder="AUC">
+                <button (click)="console()">console</button>
             </div>
         </div>
         <div class="second-col">
@@ -26,8 +26,10 @@
                     <option>Paclitaxel 80mg/m2</option>
                 </select>
                 <h3>Results</h3>
-                <h4>BSA = {{getBsa(patientInfo)}}</h4>
                 <h4>Dose = {{getPaclitaxel()}}</h4>
+                <h4>BSA = {{getBsa(patientInfo)}}</h4>
+                <h4>CrCl = {{getCrCl(patientInfo)}}</h4>
+                
             </div>
             
         </div>

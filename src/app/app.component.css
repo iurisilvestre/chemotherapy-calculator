@@ -16,3 +16,8 @@ input {
   display: block;
   margin: 10px 0;
 }
+
+button:focus {
+  background-color: blue;
+  color: white;
+}
