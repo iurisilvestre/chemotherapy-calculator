@@ -12,18 +12,20 @@
                 <input type="number" placeholder="Weight" [(ngModel)]="patientInfo.weight">
                 <input type="number" placeholder="Creatinine" [(ngModel)]="patientInfo.creatinine">
                 <input type="number" placeholder="AUC">
-                <button (click)="console()">console</button>
             </div>
         </div>
         <div class="second-col">
             <div>
                 <h3>Chemotherapy Scheme</h3>
-                <select name="Cancer" id="">
-                    <option>Lung Cancer</option>
-                    <option>Breast Cancer</option>
+                <select
+                (change)="selectCancer($event)">
+                    <option>Select Cancer</option>
+                    <option 
+                    *ngFor="let cancer of cancerList; index as i"
+                    >{{cancer.type}}</option>
                 </select>
-                <select name="Cancer" id="">
-                    <option>Paclitaxel 80mg/m2</option>
+                <select>
+                    <option></option>
                 </select>
                 <h3>Results</h3>
                 <h4>Dose = {{getPaclitaxel()}}</h4>
@@ -35,3 +37,4 @@
         </div>
     </div>
 </div >
+<!-- Paclitaxel 80mg/m2 -->

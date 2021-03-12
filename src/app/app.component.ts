@@ -1,11 +1,17 @@
 import { Component } from '@angular/core';
 
+import { cancerList } from './cancers-list';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  cancerList: any = cancerList;
+  cancers = Object.keys(cancerList);
+  cancerType: any;
+
   bsaValue: number = 0;
   paclitaxel: number = 80;
   crCl: number = 0;
@@ -38,15 +44,15 @@ export class AppComponent {
     } else if (obj.genre === 'male') {
       return `${Math.round(crClMale * 10) / 10} mL/min`;
     } else {
-      return 'NaN';
+      return 'NaN mL/min';
     }
-  }
-
-  console() {
-    console.log(this.patientInfo);
   }
 
   getPaclitaxel() {
     return `${Math.round(this.paclitaxel * this.bsaValue)} mg`;
+  }
+
+  selectCancer(event: any) {
+    console.log(event.target);
   }
 }
