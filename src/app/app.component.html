@@ -22,10 +22,13 @@
                     <option>Select Cancer</option>
                     <option 
                     *ngFor="let cancer of cancerList; index as i"
+                    [value]="i"
                     >{{cancer.type}}</option>
                 </select>
-                <select>
-                    <option></option>
+                <select (change)="selectDrug($event)" >
+                    <option>Select Regime</option>
+                    <option *ngFor="let drug of selectedCancer; index as i"
+                    [value]="i">{{drug.drug}}</option>
                 </select>
                 <h3>Results</h3>
                 <h4>Dose = {{getPaclitaxel()}}</h4>

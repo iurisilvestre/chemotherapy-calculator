@@ -9,8 +9,10 @@ import { cancerList } from './cancers-list';
 })
 export class AppComponent {
   cancerList: any = cancerList;
-  cancers = Object.keys(cancerList);
   cancerType: any;
+
+  selectedCancer: any;
+  selectedDrug: any;
 
   bsaValue: number = 0;
   paclitaxel: number = 80;
@@ -53,6 +55,12 @@ export class AppComponent {
   }
 
   selectCancer(event: any) {
-    console.log(event.target);
+    this.selectedCancer = this.cancerList[event.target.value].regime;
+    console.log(this.selectedCancer);
+  }
+
+  selectDrug(event: any) {
+    this.selectedDrug = this.selectedCancer.drug[event.target.value];
+    console.log(this.selectedDrug);
   }
 }
