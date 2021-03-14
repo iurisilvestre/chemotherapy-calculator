@@ -4,7 +4,7 @@ export const cancerList = [
     regime: [
       { drug: 'Paclitaxel 80mg/m2', doses: [80] },
       {
-        drug: 'Cyclophosphamide 600mg/m2 /Doxorubicin 60mg/m2',
+        drug: 'Cyclophosphamide 600mg/m2 + Doxorubicin 60mg/m2',
         doses: [600, 60],
       },
       { drug: 'Carboplatin + Paclitaxel 80mg/m2', doses: [80] },
@@ -26,10 +26,12 @@ export const cancerList = [
     ],
   },
   {
-    type: 'Lung Cancer - NSCLC',
+    type: 'Colorectal Cancer',
     regime: [
-      { drug: 'Paclitaxel 80ml', doses: [80] },
-      { drug: 'Paclitaxel 20ml', doses: [20] },
+      { drug: 'mFOLFOX6', doses: [85, 400, 2400, 400] },
+      { drug: 'FOLFIRI ', doses: [180, 400, 2400, 400] },
+      { drug: 'Capecitabin ', doses: [1000] },
+      { drug: 'Cetuximab ', doses: [500] },
     ],
   },
 ];

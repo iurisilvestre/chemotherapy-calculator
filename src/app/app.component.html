@@ -25,15 +25,15 @@
                     [value]="i"
                     >{{cancer.type}}</option>
                 </select>
-                <select (change)="selectDrug($event)" >
+                <select (change)="getResults(patientInfo, $event)" >
                     <option>Select Regime</option>
                     <option *ngFor="let drug of selectedCancer; index as i"
                     [value]="i">{{drug.drug}}</option>
                 </select>
                 <h3>Results</h3>
                 <h4>Dose = {{getPaclitaxel()}}</h4>
-                <h4>BSA = {{getBsa(patientInfo)}}</h4>
-                <h4>CrCl = {{getCrCl(patientInfo)}}</h4>
+                <h4>BSA = {{bsaValue}}  m2</h4>
+                <h4>CrCl = {{crClValue}} mL/min</h4>
                 
             </div>
             
