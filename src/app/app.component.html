@@ -4,14 +4,13 @@
         <div class="first-col">
             <h3>Patient Info</h3>
             <div>
-
                 <button (click)="setGenre('male')">Male</button>
                 <button (click)="setGenre('female')">Female</button>
                 <input type="number" placeholder="Age" [(ngModel)]="patientInfo.age">
                 <input type="number" placeholder="Height" [(ngModel)]="patientInfo.height">
                 <input type="number" placeholder="Weight" [(ngModel)]="patientInfo.weight">
                 <input type="number" placeholder="Creatinine" [(ngModel)]="patientInfo.creatinine">
-                <input type="number" placeholder="AUC">
+                <input type="number" placeholder="AUC" [(ngModel)]="patientInfo.auc">
             </div>
         </div>
         <div class="second-col">
@@ -31,9 +30,10 @@
                     [value]="i">{{drug.drug}}</option>
                 </select>
                 <h3>Results</h3>
-                <h4>Dose = {{getPaclitaxel()}}</h4>
-                <h4>BSA = {{bsaValue}}  m2</h4>
-                <h4>CrCl = {{crClValue}} mL/min</h4>
+                <h4 *ngFor="let dose of doseValue">Dose = {{dose}} mg</h4>
+                <h4 *ngIf="selectedDrugCarboplatin">Carboplatin = {{getCarboplatin(patientInfo)}}mg</h4>
+                <h4>BSA = {{getBsa(patientInfo)}}m2</h4>
+                <h4>CrCl = {{getCrCl(patientInfo)}}mL/min</h4>
                 
             </div>
             

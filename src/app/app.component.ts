@@ -12,13 +12,12 @@ export class AppComponent {
   cancerType: any;
 
   selectedCancer: any;
-  selectedDrug: any;
+  selectedDrugCarboplatin: any;
 
   bsaValue: number = 0;
-  paclitaxel: number = 80;
   crClValue: number = 0;
-  carboplatin: number = 0;
-  doseValue: number = 0;
+  carboplatinValue: number = 0;
+  doseValue: any = [];
 
   patientInfo = {
     genre: '',
@@ -29,15 +28,21 @@ export class AppComponent {
     auc: Number,
   };
 
-  getBsa(obj: any) {
-    let weight = Math.pow(obj.weight, 0.425);
-    let height = Math.pow(obj.height, 0.725);
-    let bsa = Math.round(0.007184 * weight * height * 10) / 10;
-    this.bsaValue = bsa;
-  }
-
   setGenre(genre: string) {
     this.patientInfo.genre = genre;
+  }
+
+  selectCancer(event: any) {
+    this.selectedCancer = this.cancerList[event.target.value].regime;
+    console.log(this.selectedCancer);
+  }
+
+  getBsa(patienData: any) {
+    let weight = Math.pow(patienData.weight, 0.425);
+    let height = Math.pow(patienData.height, 0.725);
+    let bsa = Math.round(0.007184 * weight * height * 10) / 10;
+    this.bsaValue = bsa;
+    return this.bsaValue;
   }
 
   getCrCl(patienData: any) {
@@ -51,20 +56,34 @@ export class AppComponent {
     } else {
       this.crClValue = 0;
     }
+    return this.crClValue;
   }
 
-  getPaclitaxel() {
-    return `${Math.round(this.paclitaxel * this.bsaValue)} mg`;
+  getCarboplatin(patienData: any) {
+    if (this.crClValue > 125) {
+      this.crClValue = 125;
+    }
+    this.carboplatinValue = patienData.auc * (this.crClValue + 25);
+    return this.carboplatinValue;
   }
 
-  getResults(patienData: any, regime: any) {
-    console.log(patienData);
+  getDose(event: any) {
+    this.doseValue = this.selectedCancer[
+      event.target.value
+    ].doses.map((dose: any) => Math.round(dose * this.bsaValue));
+  }
+
+  getResults(patienData: any, event: any) {
+    this.selectedDrugCarboplatin = this.selectedCancer[
+      event.target.value
+    ].carboplatin;
     this.getBsa(patienData);
     this.getCrCl(patienData);
-  }
-
-  selectCancer(event: any) {
-    this.selectedCancer = this.cancerList[event.target.value].regime;
-    console.log(this.selectedCancer);
+    if (this.selectedDrugCarboplatin === true) {
+      this.getCarboplatin(patienData);
+      this.getDose(event);
+    } else {
+      this.getDose(event);
+    }
   }
 }
