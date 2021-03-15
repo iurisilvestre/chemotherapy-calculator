@@ -7,15 +7,16 @@
                 <button (click)="setGenre('male')">Male</button>
                 <button (click)="setGenre('female')">Female</button>
                 <input type="number" placeholder="Age" [(ngModel)]="patientInfo.age">
-                <input type="number" placeholder="Height" [(ngModel)]="patientInfo.height">
-                <input type="number" placeholder="Weight" [(ngModel)]="patientInfo.weight">
-                <input type="number" placeholder="Creatinine" [(ngModel)]="patientInfo.creatinine">
+                <input type="number" placeholder="Height" [(ngModel)]="patientInfo.height" (input)="getDose(selectedDrug)">
+                <input type="number" placeholder="Weight" [(ngModel)]="patientInfo.weight" (input)="getDose(selectedDrug)">
+                <input type="number" placeholder="Creatinine" [(ngModel)]="patientInfo.creatinine" >
                 <input type="number" placeholder="AUC" [(ngModel)]="patientInfo.auc">
+                <button (click)="resetPatientInfo()">Reset</button>
             </div>
         </div>
         <div class="second-col">
             <div>
-                <h3>Chemotherapy Scheme</h3>
+                <h3>Course Scheme</h3>
                 <select
                 (change)="selectCancer($event)">
                     <option>Select Cancer</option>
@@ -30,9 +31,9 @@
                     [value]="i">{{drug.drug}}</option>
                 </select>
                 <h3>Results</h3>
-                <h4 *ngFor="let dose of doseValue">Dose = {{dose}} mg</h4>
+                <h4 *ngFor="let dose of doseValue">Dose = {{dose}}mg</h4>
                 <h4 *ngIf="selectedDrugCarboplatin">Carboplatin = {{getCarboplatin(patientInfo)}}mg</h4>
-                <h4>BSA = {{getBsa(patientInfo)}}m2</h4>
+                <h4>BSA = {{getBsa(patientInfo)}}m²</h4>
                 <h4>CrCl = {{getCrCl(patientInfo)}}mL/min</h4>
                 
             </div>

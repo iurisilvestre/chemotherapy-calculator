@@ -12,6 +12,7 @@ export class AppComponent {
   cancerType: any;
 
   selectedCancer: any;
+  selectedDrug: any;
   selectedDrugCarboplatin: any;
 
   bsaValue: number = 0;
@@ -35,6 +36,17 @@ export class AppComponent {
   selectCancer(event: any) {
     this.selectedCancer = this.cancerList[event.target.value].regime;
     console.log(this.selectedCancer);
+  }
+
+  resetPatientInfo() {
+    this.patientInfo = {
+      genre: '',
+      age: Number,
+      height: Number,
+      weight: Number,
+      creatinine: Number,
+      auc: Number,
+    };
   }
 
   getBsa(patienData: any) {
@@ -74,6 +86,7 @@ export class AppComponent {
   }
 
   getResults(patienData: any, event: any) {
+    this.selectedDrug = event;
     this.selectedDrugCarboplatin = this.selectedCancer[
       event.target.value
     ].carboplatin;
@@ -85,5 +98,9 @@ export class AppComponent {
     } else {
       this.getDose(event);
     }
+  }
+
+  sayhello(event: any) {
+    console.log(event);
   }
 }
