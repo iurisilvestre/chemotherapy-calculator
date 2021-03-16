@@ -8,6 +8,7 @@ import { cancerList } from './cancers-list';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
+  // Globals
   cancerList: any = cancerList;
   cancerType: any;
 
@@ -29,16 +30,17 @@ export class AppComponent {
     auc: Number,
   };
 
+  // Settings Functions and Dependencies
   setGenre(genre: string) {
     this.patientInfo.genre = genre;
   }
 
   selectCancer(event: any) {
     this.selectedCancer = this.cancerList[event.target.value].regime;
-    console.log(this.selectedCancer);
   }
 
   resetPatientInfo() {
+    this.selectedCancer = {};
     this.patientInfo = {
       genre: '',
       age: Number,
@@ -49,11 +51,30 @@ export class AppComponent {
     };
   }
 
+  allowSelectCancers(patienData: any) {
+    if (this.crClValue != 0 && this.bsaValue != null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  allowSelectRegime() {
+    if (this.selectedCancer != null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  // Calc Functions
   getBsa(patienData: any) {
     let weight = Math.pow(patienData.weight, 0.425);
     let height = Math.pow(patienData.height, 0.725);
-    let bsa = Math.round(0.007184 * weight * height * 10) / 10;
-    this.bsaValue = bsa;
+    this.bsaValue = Math.round(0.007184 * weight * height * 10) / 10;
+    if (isNaN(this.bsaValue)) {
+      this.bsaValue = 0;
+    }
     return this.bsaValue;
   }
 
@@ -68,6 +89,9 @@ export class AppComponent {
     } else {
       this.crClValue = 0;
     }
+    if (isNaN(this.crClValue)) {
+      this.crClValue = 0;
+    }
     return this.crClValue;
   }
 
@@ -76,31 +100,42 @@ export class AppComponent {
       this.crClValue = 125;
     }
     this.carboplatinValue = patienData.auc * (this.crClValue + 25);
+    if (isNaN(this.carboplatinValue)) {
+      this.carboplatinValue = 0;
+    }
     return this.carboplatinValue;
   }
 
-  getDose(event: any) {
-    this.doseValue = this.selectedCancer[
-      event.target.value
-    ].doses.map((dose: any) => Math.round(dose * this.bsaValue));
+  getDose(event: any, patienData: any) {
+    let i = event.target.value;
+    let obj = this.selectedCancer[i].drugDoses;
+    this.doseValue = [];
+    let calc;
+    if (this.selectedCancer[i].bsaCalc === true) {
+      calc = this.bsaValue;
+    } else {
+      calc = patienData.weight;
+    }
+    for (let i = 0; i < obj.length; i++) {
+      this.doseValue.push({
+        drug: obj[i].drug,
+        dose: obj[i].dose * calc,
+      });
+    }
   }
 
   getResults(patienData: any, event: any) {
     this.selectedDrug = event;
     this.selectedDrugCarboplatin = this.selectedCancer[
       event.target.value
-    ].carboplatin;
+    ].carboplatinCalc;
     this.getBsa(patienData);
     this.getCrCl(patienData);
     if (this.selectedDrugCarboplatin === true) {
       this.getCarboplatin(patienData);
-      this.getDose(event);
+      this.getDose(event, patienData);
     } else {
-      this.getDose(event);
+      this.getDose(event, patienData);
     }
-  }
-
-  sayhello(event: any) {
-    console.log(event);
   }
 }
