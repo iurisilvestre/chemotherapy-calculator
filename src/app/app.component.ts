@@ -36,7 +36,8 @@ export class AppComponent {
   }
 
   selectCancer(event: any) {
-    this.selectedCancer = this.cancerList[event.target.value].regime;
+    console.log(event);
+    this.selectedCancer = this.cancerList[event.value].regime;
   }
 
   resetPatientInfo() {

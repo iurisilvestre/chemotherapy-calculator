@@ -3,6 +3,8 @@
     <div class="main">
         <div class="first-col">
             <h3>Patient Info</h3>
+            
+
             <div>
                 <button (click)="setGenre('male')">Male</button>
                 <button (click)="setGenre('female')">Female</button>
@@ -18,7 +20,7 @@
         <div class="second-col">
             <div>
                 <h3>Course Scheme</h3>
-                <select
+                <!-- <select
                 (change)="selectCancer($event)"
                 [disabled]="allowSelectCancers(patientInfo)">
                     <option>Select Cancer</option>
@@ -33,8 +35,30 @@
                     <option>Select Regime</option>
                     <option *ngFor="let drug of selectedCancer; index as i"
                     [value]="i">{{drug.drugOption}}</option>
-                </select>
-                
+                </select> -->
+
+                <mat-form-field appearance="fill">
+                    <mat-label>Select Cancer</mat-label>
+                    <mat-select (selectionChange)="selectCancer($event)"
+                    [disabled]="allowSelectCancers(patientInfo)">
+                      <mat-option *ngFor="let cancer of cancerList; index as i"
+                      [value]="i">
+                      {{cancer.type}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                  
+                  <mat-form-field appearance="fill">
+                    <mat-label>Select Regime</mat-label>
+                    <mat-select (change)="getResults(patientInfo, $event)"
+                    [disabled]="allowSelectRegime()">
+                      <mat-option *ngFor="let drug of selectedCancer; index as i"
+                      [value]="i">
+                      {{drug.drugOption}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
                 <h3>Results</h3>
                 <h4 *ngFor="let dose of doseValue">{{dose.drug}}{{dose.dose}}mg</h4>
                 <h4 *ngIf="selectedDrugCarboplatin">Carboplatin = {{getCarboplatin(patientInfo)}}mg</h4>
