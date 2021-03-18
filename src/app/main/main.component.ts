@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { cancerList } from '../cancers-list';
 import { interval } from 'rxjs';
-import { takeWhile } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-main',
@@ -9,17 +9,16 @@ import { takeWhile } from 'rxjs/operators';
   styleUrls: ['./main.component.css'],
 })
 export class MainComponent implements OnInit {
-  constructor() {}
+  constructor(private _snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    interval(500)
-      /* .pipe(takeWhile(() => !stop)) */
-      .subscribe(() => {
-        this.allowSelectCancers();
-      });
+    interval(500).subscribe(() => {
+      this.allowSelectCancers();
+    });
   }
 
   // Globals
+
   cancerList: any = cancerList;
   cancerType: any;
 
@@ -45,7 +44,6 @@ export class MainComponent implements OnInit {
   // Settings Functions and Dependencies
 
   selectCancer(event: any): void {
-    console.log(event);
     this.selectedCancer = this.cancerList[event.value].regimen;
   }
 
@@ -60,6 +58,7 @@ export class MainComponent implements OnInit {
       creatinine: null,
       auc: null,
     };
+    this.doseValue = [];
   }
 
   allowSelectCancers(): void {
@@ -115,9 +114,6 @@ export class MainComponent implements OnInit {
       this.crClValue = 125;
     }
     this.carboplatinValue = patienData.auc * (this.crClValue + 25);
-    if (isNaN(this.carboplatinValue)) {
-      this.carboplatinValue = 0;
-    }
     return this.carboplatinValue;
   }
 
@@ -151,6 +147,7 @@ export class MainComponent implements OnInit {
       this.getDose(event, patienData);
     } else {
       this.getDose(event, patienData);
+      this.carboplatinValue = 0;
     }
   }
 
@@ -163,5 +160,15 @@ export class MainComponent implements OnInit {
       str += obj[i].drug + obj[i].dose + ' mg;\n';
     }
     return str;
+  }
+
+  openSnackBar(snackBarMsg: string) {
+    if (snackBarMsg != '') {
+      this._snackBar.open(snackBarMsg, '', {
+        duration: 1000,
+        horizontalPosition: 'center',
+        verticalPosition: 'top',
+      });
+    }
   }
 }

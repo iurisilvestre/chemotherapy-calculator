@@ -1,6 +1,6 @@
-<div class="main">
+<div class="main-container">
         <div class="first-col">
-            <h3>Patient Info</h3>
+            <h3>Insert Patient Info</h3>
             <div class="patient-info">
                 <mat-button-toggle-group name="fontStyle" [(ngModel)]="patientInfo.genre">
                     <mat-button-toggle class="btn-toggle" value="male">Male</mat-button-toggle>
@@ -37,7 +37,7 @@
                         <span matSuffix> mL*min/mL</span>
                     </mat-form-field>
                 </div>
-                <button mat-icon-button (click)="resetPatientInfo()">
+                <button mat-icon-button (click)="resetPatientInfo()" (click)="openSnackBar('Values cleared!')">
                     <mat-icon>replay</mat-icon>
                 </button>
                 
@@ -46,12 +46,13 @@
             </div>
         </div>
         <div class="second-col">
-            <h3>Course Scheme</h3>
+            <h3>Select Course Scheme</h3>
             <div class="course-scheme-container">
                 <mat-form-field appearance="fill" class="select-form">
                     <mat-label>Select Cancer</mat-label>
-                    <mat-select class="select" (selectionChange)="selectCancer($event)"
+                    <mat-select class="select" (selectionChange)="selectCancer($event)" 
                     [disabled]="selectCancersDisabled">
+                        <mat-option disabled>Select Cancer</mat-option>
                       <mat-option *ngFor="let cancer of cancerList; index as i"
                         [value]="i">
                         {{cancer.type}}
@@ -62,6 +63,7 @@
                     <mat-label>Select Regimen</mat-label>
                     <mat-select class="select" (selectionChange)="getResults(patientInfo, $event)"
                     [disabled]="allowSelectRegimen()">
+                    <mat-option disabled>Select Regimen</mat-option>
                       <mat-option *ngFor="let drug of selectedCancer; index as i"
                         [value]="i">
                         {{drug.drugOption}}
@@ -76,7 +78,7 @@
                         <p *ngFor="let dose of doseValue">{{dose.drug}}{{dose.dose}} mg</p>
                         <p *ngIf="carboplatinValue">Carboplatin: {{getCarboplatin(patientInfo)}} mg</p>
                         <div class="copy-to-clipboard">
-                            <button mat-icon-button [cdkCopyToClipboard]="copyResToClipboard(doseValue)">
+                            <button mat-icon-button [cdkCopyToClipboard]="copyResToClipboard(doseValue)" (click)="openSnackBar(' Copied '+copyResToClipboard(doseValue)+'!')">
                                 <mat-icon>content_copy</mat-icon>
                             </button>
                         </div>
@@ -86,7 +88,7 @@
                             <p class="calcbox-title">BSA</p>
                             <p><span>{{getBsa(patientInfo)}}</span> m²</p>
                             <div class="copy-to-clipboard">
-                                <button mat-icon-button [cdkCopyToClipboard]="'BSA= '+crClValue.toString()+' m²'">
+                                <button mat-icon-button [cdkCopyToClipboard]="'BSA= '+crClValue.toString()+' m²'" (click)="openSnackBar('Copied BSA value!')">
                                     <mat-icon>content_copy</mat-icon>
                                 </button>
                             </div>
@@ -95,7 +97,7 @@
                             <p class="calcbox-title">CrCl</p>
                             <p><span>{{getCrCl(patientInfo)}}</span> mL/min</p>
                             <div class="copy-to-clipboard">
-                                <button mat-icon-button [cdkCopyToClipboard]="'CrCl= '+crClValue.toString()+' mL/min'">
+                                <button mat-icon-button [cdkCopyToClipboard]="'CrCl= '+crClValue.toString()+' mL/min'" (click)="openSnackBar('Copied CrCl value!')">
                                     <mat-icon>content_copy</mat-icon>
                                 </button>
                             </div>
