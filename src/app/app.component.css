@@ -1,23 +1,19 @@
-.main {
+.container {
   display: flex;
-  margin: 40px;
-}
-
-input {
-  display: block;
-}
-
-.second-col {
-  display: flex;
+  justify-content: center;
   flex-direction: column;
-  margin: 0 20px;
-}
-.second-col select {
-  display: block;
-  margin: 10px 0;
 }
 
-button:focus {
-  background-color: blue;
+.title {
+  text-align: center;
+  margin-top: 20px;
   color: white;
+  font-weight: 700;
+  font-size: 30px;
+  padding: 20px;
+}
+
+.white-circle {
+  background: white;
+  width: 1000px;
 }

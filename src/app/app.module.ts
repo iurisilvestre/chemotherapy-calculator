@@ -4,15 +4,16 @@ import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatSelectModule } from '@angular/material/select';
+import { MaterialModule } from './material/material.module';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MainComponent],
   imports: [
     BrowserModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatSelectModule,
+    MaterialModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

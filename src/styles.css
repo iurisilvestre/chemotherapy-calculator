@@ -1,4 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/*REMOVE ARROW FROM NUMBER INPUTS*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+html {
+  height: 100vh;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+}
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  display: flex;
+  justify-content: center;
+  /* background-color: rgb(74, 143, 160); */
+  background: rgb(3, 120, 166);
+  background: linear-gradient(
+    335deg,
+    rgba(3, 120, 166, 1) 46%,
+    rgba(64, 169, 198, 1) 100%
+  );
+}

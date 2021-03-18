@@ -1,0 +1,131 @@
+.main {
+  max-width: 1200px;
+  background-color: white;
+  border-radius: 30px;
+  box-shadow: 0 13.5px 7.1px rgba(0, 0, 0, 0.032),
+    0 30.3px 23.9px rgba(0, 0, 0, 0.048), 0 100px 107px rgba(0, 0, 0, 0.08);
+  display: flex;
+  padding: 30px;
+}
+
+p {
+  margin: 0;
+}
+
+h3 {
+  font-weight: 500;
+  font-size: 20px;
+  color: #5f5f5f;
+}
+
+.first-col {
+  width: 40%;
+  padding: 10px;
+}
+
+.first-col .btn-toggle {
+  width: 100px;
+  height: 40px;
+}
+
+.input-boxes {
+  margin-top: 17px;
+}
+
+.first-col .patient-input {
+  display: block;
+  width: 200px;
+  height: 60px;
+  font-size: 13px;
+  margin: -10px 0;
+}
+
+.first-col button {
+  position: relative;
+  left: -5px;
+  margin-top: 5px;
+}
+
+.second-col {
+  width: 60%;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.course-scheme-container {
+  height: 30%;
+}
+
+.course-scheme-container .select-form {
+  width: 100%;
+}
+
+.results-container {
+  margin-top: 5px;
+  height: 80%;
+}
+
+.result-dose {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-color: #f5f9fa;
+  padding: 15px;
+  height: 130px;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+}
+
+.result-dose p {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.result-dose .copy-to-clipboard {
+  position: absolute;
+  display: flex;
+  right: -5px;
+  top: 90px;
+}
+
+.bsa-crcl-container {
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.calcbox {
+  position: relative;
+  margin-top: 10px;
+  width: 48%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+}
+
+.calcbox span {
+  color: black;
+  font-size: large;
+  font-weight: 500;
+}
+
+.calcbox-title {
+  font-weight: 500;
+  color: rgb(167, 167, 167);
+}
+
+.copy-to-clipboard .mat-icon {
+  color: rgb(167, 167, 167);
+  font-size: 20px;
+}
+
+.calcbox .copy-to-clipboard {
+  position: absolute;
+  display: flex;
+  top: 30px;
+  right: -5px;
+}

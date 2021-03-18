@@ -1,7 +1,7 @@
 export const cancerList = [
   {
     type: 'Breast Cancer',
-    regime: [
+    regimen: [
       {
         drugOption: 'Paclitaxel 80mg/m²',
         drugDoses: [{ drug: 'Paclitaxel: ', dose: 80 }],
@@ -14,7 +14,7 @@ export const cancerList = [
           { drug: 'Cyclophosphamide: ', dose: 600 },
           { drug: 'Doxorubicin: ', dose: 60 },
         ],
-        carboplatin: false,
+        carboplatinCalc: false,
         bsaCalc: true,
       },
       {
@@ -27,7 +27,7 @@ export const cancerList = [
         drugOption: 'Trastuzumab',
         drugDoses: [
           { drug: 'Loading Dose: ', dose: 8 },
-          { drug: 'Subsequent Dose : ', dose: 6 },
+          { drug: 'Subsequent Dose : ', dose: 600 },
         ],
         carboplatinCalc: false,
         bsaCalc: false,
@@ -36,28 +36,29 @@ export const cancerList = [
   },
   {
     type: 'Lung Cancer - NSCLC',
-    regime: [
+    regimen: [
       {
         drugOption: 'Carboplatin + Paclitaxel 200mg/m²',
         drugDoses: [{ drug: 'Paclitaxel: ', dose: 200 }],
-        carboplatin: true,
+        carboplatinCalc: true,
         bsaCalc: true,
       },
       {
         drugOption: 'Carboplatin + Pemetrexed 500mg/m²',
         drugDoses: [{ drug: 'Pemetrexed: ', dose: 500 }],
-        carboplatin: true,
+        carboplatinCalc: true,
         bsaCalc: true,
       },
     ],
   },
   {
     type: 'Lung Cancer - SCLC',
-    regime: [
+    regimen: [
       {
         drugOption: 'Caboplatin + Etoposide 100mg/m²',
         drugDoses: [{ drug: 'Etoposide: ', dose: 100 }],
-        carboplatin: true,
+        carboplatinCalc: true,
+        bsaCalc: true,
       },
       {
         drugOption: 'Cisplatin 80mg/m² + Etoposide 100mg/m²',
@@ -65,46 +66,46 @@ export const cancerList = [
           { drug: 'Cisplatin: ', dose: 80 },
           { drug: 'Etoposide: ', dose: 100 },
         ],
-        carboplatin: false,
+        carboplatinCalc: false,
         bsaCalc: true,
       },
     ],
   },
   {
     type: 'Colorectal Cancer',
-    regime: [
+    regimen: [
       {
         drugOption: 'mFOLFOX6',
         drugDoses: [
           { drug: 'Oxaliplatin: ', dose: 85 },
-          { drug: '5FU (Bolus Dose): ', dose: 400 },
-          { drug: 'Continuous Infusion: 46h Dose: ', dose: 2400 },
+          { drug: '5FU Bolus: ', dose: 400 },
+          { drug: '5FU Continuous Infusion 46h: ', dose: 2400 },
           { drug: 'Folonic Acid: ', dose: 400 },
         ],
-        carboplatin: false,
+        carboplatinCalc: false,
         bsaCalc: true,
       },
       {
         drugOption: 'FOLFIRI ',
         drugDoses: [
           { drug: 'Irinotecan: ', dose: 180 },
-          { drug: '5FU (Bolus Dose): ', dose: 400 },
-          { drug: 'Continuous Infusion: 46h Dose: ', dose: 2400 },
+          { drug: '5FU Bolus: ', dose: 400 },
+          { drug: '5FU Continuous Infusion 46h: ', dose: 2400 },
           { drug: 'Folonic Acid: ', dose: 400 },
         ],
-        carboplatin: false,
+        carboplatinCalc: false,
         bsaCalc: true,
       },
       {
         drugOption: 'Capecitabin ',
         drugDoses: [{ drug: 'Capecitabin: ', dose: 1000 }],
-        carboplatin: false,
+        carboplatinCalc: false,
         bsaCalc: true,
       },
       {
         drugOption: 'Cetuximab ',
         drugDoses: [{ drug: 'Cetuximab: ', dose: 500 }],
-        carboplatin: false,
+        carboplatinCalc: false,
         bsaCalc: true,
       },
     ],
