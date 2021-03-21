@@ -10,6 +10,7 @@ import { MatCardModule } from '@angular/material/card';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 const MaterialComponents = [
   CommonModule,
@@ -23,6 +24,7 @@ const MaterialComponents = [
   ClipboardModule,
   MatSnackBarModule,
   MatTabsModule,
+  MatTooltipModule,
 ];
 
 @NgModule({

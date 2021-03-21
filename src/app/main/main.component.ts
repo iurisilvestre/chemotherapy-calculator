@@ -89,10 +89,14 @@ export class MainComponent implements OnInit {
   }
 
   checkProperties(obj: any) {
-    for (var key in obj) {
-      if (obj[key] !== null && obj[key] != '') {
-        return true;
-      }
+    if (
+      obj.genre != '' &&
+      obj.age > 0 &&
+      obj.height > 0 &&
+      obj.weight > 0 &&
+      obj.creatinine > 0
+    ) {
+      return true;
     }
     return false;
   }
@@ -115,6 +119,14 @@ export class MainComponent implements OnInit {
         horizontalPosition: 'center',
         verticalPosition: 'top',
       });
+    }
+  }
+
+  verifyCarboplatin(patienData: any) {
+    if (this.selectedDrugCarboplatin === true && patienData.auc > 0) {
+      this.setAucRequired = true;
+    } else {
+      this.setAucRequired = false;
     }
   }
 
@@ -160,29 +172,23 @@ export class MainComponent implements OnInit {
     }
   }
 
-  verifyCarboplatin(patienData: any) {
-    if (this.selectedDrugCarboplatin === true && patienData.auc > 0) {
-      this.setAucRequired = true;
-    } else {
-      this.setAucRequired = false;
-    }
-  }
-
   getDose(patienData: any): void {
-    let i = this.selectedDrug;
-    let obj = this.selectedCancer[i].drugDoses;
-    this.doseValue = [];
-    let calc;
-    if (this.selectedCancer[i].bsaCalc === true) {
-      calc = this.bsaValue;
-    } else {
-      calc = patienData.weight;
-    }
-    for (let i = 0; i < obj.length; i++) {
-      this.doseValue.push({
-        drug: obj[i].drug,
-        dose: obj[i].dose * calc,
-      });
+    if (this.checkProperties(patienData)) {
+      let i = this.selectedDrug;
+      let obj = this.selectedCancer[i].drugDoses;
+      this.doseValue = [];
+      let calc;
+      if (this.selectedCancer[i].bsaCalc === true) {
+        calc = this.bsaValue;
+      } else {
+        calc = patienData.weight;
+      }
+      for (let i = 0; i < obj.length; i++) {
+        this.doseValue.push({
+          drug: obj[i].drug,
+          dose: obj[i].dose * calc,
+        });
+      }
     }
   }
 
