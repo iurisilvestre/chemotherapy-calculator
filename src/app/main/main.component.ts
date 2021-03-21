@@ -69,11 +69,7 @@ export class MainComponent implements OnInit {
   }
 
   allowSelectCancers(): void {
-    if (
-      this.crClValue > 0 &&
-      this.bsaValue > 0 &&
-      this.patientInfo.genre !== ''
-    ) {
+    if (this.bsaValue > 0 && this.patientInfo.genre !== '') {
       this.selectCancersDisabled = false;
     } else {
       this.selectCancersDisabled = true;
@@ -174,20 +170,23 @@ export class MainComponent implements OnInit {
 
   getDose(patienData: any): void {
     if (this.checkProperties(patienData)) {
-      let i = this.selectedDrug;
-      let obj = this.selectedCancer[i].drugDoses;
       this.doseValue = [];
-      let calc;
-      if (this.selectedCancer[i].bsaCalc === true) {
-        calc = this.bsaValue;
-      } else {
-        calc = patienData.weight;
-      }
-      for (let i = 0; i < obj.length; i++) {
-        this.doseValue.push({
-          drug: obj[i].drug,
-          dose: obj[i].dose * calc,
-        });
+
+      if (this.selectedDrug > -1) {
+        let i = this.selectedDrug;
+        let obj = this.selectedCancer[i].drugDoses;
+        let calc;
+        if (this.selectedCancer[i].bsaCalc === true) {
+          calc = this.bsaValue;
+        } else {
+          calc = patienData.weight;
+        }
+        for (let i = 0; i < obj.length; i++) {
+          this.doseValue.push({
+            drug: obj[i].drug,
+            dose: obj[i].dose * calc,
+          });
+        }
       }
     }
   }
@@ -198,6 +197,6 @@ export class MainComponent implements OnInit {
       event.value
     ].carboplatinCalc;
     this.getDose(patienData);
-    this.getCarboplatin(patienData);
+    this.getCarboplatin(this.patientInfo);
   }
 }

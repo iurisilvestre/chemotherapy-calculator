@@ -27,7 +27,7 @@ export const cancerList = [
         courseScheme: 'Trastuzumab',
         drugDoses: [
           { drug: 'Loading Dose: ', dose: 8 },
-          { drug: 'Subsequent Dose : ', dose: 600 },
+          { drug: 'Subsequent Dose : ', dose: 6 },
         ],
         carboplatinCalc: false,
         bsaCalc: false,
@@ -97,13 +97,13 @@ export const cancerList = [
         bsaCalc: true,
       },
       {
-        courseScheme: 'Capecitabin ',
+        courseScheme: 'Capecitabin 1000mg/m²',
         drugDoses: [{ drug: 'Capecitabin: ', dose: 1000 }],
         carboplatinCalc: false,
         bsaCalc: true,
       },
       {
-        courseScheme: 'Cetuximab ',
+        courseScheme: 'Cetuximab 500mg/m²',
         drugDoses: [{ drug: 'Cetuximab: ', dose: 500 }],
         carboplatinCalc: false,
         bsaCalc: true,
