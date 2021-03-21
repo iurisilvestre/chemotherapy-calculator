@@ -23,7 +23,7 @@ html {
 
 body {
   width: 100%;
-  min-height: 100vh;
+  /*   min-height: 100vh; */
 }
 body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -33,7 +33,7 @@ body {
   background: rgb(3, 120, 166);
   background: linear-gradient(
     335deg,
-    rgba(3, 120, 166, 1) 46%,
-    rgba(64, 169, 198, 1) 100%
+    rgb(4, 100, 138) 46%,
+    rgb(87, 200, 231) 100%
   );
 }

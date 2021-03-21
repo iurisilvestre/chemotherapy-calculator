@@ -9,6 +9,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatCardModule } from '@angular/material/card';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const MaterialComponents = [
   CommonModule,
@@ -21,6 +22,7 @@ const MaterialComponents = [
   MatCardModule,
   ClipboardModule,
   MatSnackBarModule,
+  MatTabsModule,
 ];
 
 @NgModule({

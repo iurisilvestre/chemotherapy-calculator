@@ -13,15 +13,15 @@
                         <span matSuffix> years</span>
                     </mat-form-field>
 
-                    <mat-form-field autocomplete="off" class="patient-input" appearance="outline" hideRequiredMarker>
+                    <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                         <mat-label>Height</mat-label>
-                        <input matInput type="number" [(ngModel)]="patientInfo.height" required (input)="getDose(selectedDrug, patientInfo)">
+                        <input matInput type="number" [(ngModel)]="patientInfo.height" required >
                         <span matSuffix> cm</span>
                     </mat-form-field>
 
                     <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                         <mat-label>Weight</mat-label>
-                        <input matInput type="number" [(ngModel)]="patientInfo.weight" (input)="getDose(selectedDrug, patientInfo)" required>
+                        <input matInput type="number" [(ngModel)]="patientInfo.weight" required>
                         <span matSuffix> kg</span>
                     </mat-form-field>
 
@@ -31,9 +31,9 @@
                         <span matSuffix> mg/dL</span>
                     </mat-form-field>
 
-                    <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
+                    <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker (input)="getCarboplatin(patientInfo)">
                         <mat-label   mat-label>AUC</mat-label>
-                        <input matInput type="number" [(ngModel)]="patientInfo.auc">
+                        <input [required]="setAucRequired" matInput type="number" [(ngModel)]="patientInfo.auc">
                         <span matSuffix> mL*min/mL</span>
                     </mat-form-field>
                 </div>
@@ -53,42 +53,48 @@
                     <mat-select class="select" (selectionChange)="selectCancer($event)" 
                     [disabled]="selectCancersDisabled">
                         <mat-option disabled>Select Cancer</mat-option>
-                      <mat-option *ngFor="let cancer of cancerList; index as i"
-                        [value]="i">
-                        {{cancer.type}}
-                        </mat-option>
+                        <div *ngIf="!selectCancersDisabled">
+                            <mat-option *ngFor="let cancer of cancerList; index as i"
+                            [value]="i">
+                            {{cancer.type}}
+                            </mat-option>
+                        </div>
+                      
                     </mat-select>
                     </mat-form-field>  
                 <mat-form-field appearance="fill" class="select-form">
                     <mat-label>Select Regimen</mat-label>
                     <mat-select class="select" (selectionChange)="getResults(patientInfo, $event)"
                     [disabled]="allowSelectRegimen()">
-                    <mat-option disabled>Select Regimen</mat-option>
-                      <mat-option *ngFor="let drug of selectedCancer; index as i"
+                        <mat-option disabled>Select Regimen</mat-option>
+                        <mat-option *ngFor="let drug of selectedCancer; index as i"
                         [value]="i">
-                        {{drug.drugOption}}
+                        {{drug.courseScheme}}
                         </mat-option>
                     </mat-select>
-                    </mat-form-field>
+                </mat-form-field>
             </div>
+            
             <div class="results-container">
                 <h3>Results</h3>   
                 <div class="result-box">
+
                     <div class="result-dose">
+                        <p *ngIf="carboplatinValue>0">Carboplatin: {{carboplatinValue}} mg</p>
                         <p *ngFor="let dose of doseValue">{{dose.drug}}{{dose.dose}} mg</p>
-                        <p *ngIf="carboplatinValue">Carboplatin: {{getCarboplatin(patientInfo)}} mg</p>
                         <div class="copy-to-clipboard">
-                            <button mat-icon-button [cdkCopyToClipboard]="copyResToClipboard(doseValue)" (click)="openSnackBar(' Copied '+copyResToClipboard(doseValue)+'!')">
+                            <button mat-icon-button [cdkCopyToClipboard]="copyResToClipboard(doseValue)" (click)="openSnackBar(copyResToClipboard(doseValue)+' copied!')">
                                 <mat-icon>content_copy</mat-icon>
                             </button>
                         </div>
+                        
                     </div>
                     <div class="bsa-crcl-container">
                         <div class="calcbox bsa-box">
                             <p class="calcbox-title">BSA</p>
                             <p><span>{{getBsa(patientInfo)}}</span> m²</p>
                             <div class="copy-to-clipboard">
-                                <button mat-icon-button [cdkCopyToClipboard]="'BSA= '+crClValue.toString()+' m²'" (click)="openSnackBar('Copied BSA value!')">
+                                <button mat-icon-button [cdkCopyToClipboard]="'BSA= '+crClValue.toString()+' m²'" (click)="openSnackBar('BSA value copied!')">
                                     <mat-icon>content_copy</mat-icon>
                                 </button>
                             </div>
@@ -97,7 +103,7 @@
                             <p class="calcbox-title">CrCl</p>
                             <p><span>{{getCrCl(patientInfo)}}</span> mL/min</p>
                             <div class="copy-to-clipboard">
-                                <button mat-icon-button [cdkCopyToClipboard]="'CrCl= '+crClValue.toString()+' mL/min'" (click)="openSnackBar('Copied CrCl value!')">
+                                <button mat-icon-button [cdkCopyToClipboard]="'CrCl= '+crClValue.toString()+' mL/min'" (click)="openSnackBar('CrCl value copied!')">
                                     <mat-icon>content_copy</mat-icon>
                                 </button>
                             </div>
@@ -106,5 +112,129 @@
                 </div>
             </div>
         </div>
-    </div>
+</div>
+
+<div class="main-container-mobile">
+    <mat-tab-group mat-align-tabs="center">
+        <mat-tab label="Patient Info">
+            <div class="first-col">
+                <h3>Insert Patient Info</h3>
+                <div class="patient-info">
+                    <mat-button-toggle-group name="fontStyle" [(ngModel)]="patientInfo.genre">
+                        <mat-button-toggle class="btn-toggle" value="male">Male</mat-button-toggle>
+                        <mat-button-toggle class="btn-toggle" value="female">Female</mat-button-toggle>
+                    </mat-button-toggle-group>
+                    <div class="input-boxes">
+                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
+                            <mat-label>Age</mat-label>
+                            <input matInput type="number" [(ngModel)]="patientInfo.age" required>
+                            <span matSuffix> years</span>
+                        </mat-form-field>
+        
+                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
+                            <mat-label>Height</mat-label>
+                            <input matInput type="number" [(ngModel)]="patientInfo.height" required (input)="getDose(patientInfo)">
+                            <span matSuffix> cm</span>
+                        </mat-form-field>
+        
+                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
+                            <mat-label>Weight</mat-label>
+                            <input matInput type="number" [(ngModel)]="patientInfo.weight" (input)="getDose(patientInfo)" required>
+                            <span matSuffix> kg</span>
+                        </mat-form-field>
+        
+                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
+                            <mat-label>Creatinine</mat-label>
+                            <input matInput type="number" [(ngModel)]="patientInfo.creatinine" required>
+                            <span matSuffix> mg/dL</span>
+                        </mat-form-field>
+        
+                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker (input)="getCarboplatin(patientInfo)">
+                            <mat-label   mat-label>AUC</mat-label>
+                            <input matInput type="number" [(ngModel)]="patientInfo.auc">
+                            <span matSuffix> mL*min/mL</span>
+                        </mat-form-field>
+                    </div>
+                    <button mat-icon-button (click)="resetPatientInfo()" (click)="openSnackBar('Values cleared!')">
+                        <mat-icon>replay</mat-icon>
+                    </button>
+                    
+                        
+                    
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab class="tabs" label="Results">
+            <div class="second-col">
+                <h3>Select Course Scheme</h3>
+                <div class="course-scheme-container">
+                    <mat-form-field appearance="fill" class="select-form" placeholder="Select Cancer">
+                        <mat-label>Select Cancer</mat-label>
+                        <mat-select class="select" (selectionChange)="selectCancer($event)" 
+                        [disabled]="selectCancersDisabled">
+                            <mat-option disabled>Select Cancer</mat-option>
+                            <div *ngIf="!selectCancersDisabled">
+                                <mat-option *ngFor="let cancer of cancerList; index as i"
+                                [value]="i">
+                                {{cancer.type}}
+                                </mat-option>
+                            </div>
+                          
+                        </mat-select>
+                        </mat-form-field>  
+                    <mat-form-field appearance="fill" class="select-form">
+                        <mat-label>Select Regimen</mat-label>
+                        <mat-select class="select" (selectionChange)="getResults(patientInfo, $event)"
+                        [disabled]="allowSelectRegimen()">
+                        <mat-option disabled>Select Regimen</mat-option>
+                          <mat-option *ngFor="let drug of selectedCancer; index as i"
+                            [value]="i">
+                            {{drug.courseScheme}}
+                            </mat-option>
+                        </mat-select>
+                        </mat-form-field>
+                </div>
+                
+                <div class="results-container">
+                    <h3>Results</h3>   
+                    
+                    <div class="result-box">
+                        
+                        <div class="result-dose">
+                            <p *ngFor="let dose of doseValue">{{dose.drug}}{{dose.dose}} mg</p>
+                            <p *ngIf="carboplatinValue>0">Carboplatin: {{carboplatinValue}} mg</p>
+                            <div class="copy-to-clipboard">
+                                <button mat-icon-button [cdkCopyToClipboard]="copyResToClipboard(doseValue)" (click)="openSnackBar(copyResToClipboard(doseValue)+' copied!')">
+                                    <mat-icon>content_copy</mat-icon>
+                                </button>
+                            </div>
+                            
+                        </div>
+                        <div class="bsa-crcl-container">
+                            <div class="calcbox bsa-box">
+                                <p class="calcbox-title">BSA</p>
+                                <p><span>{{getBsa(patientInfo)}}</span> m²</p>
+                                <div class="copy-to-clipboard">
+                                    <button mat-icon-button [cdkCopyToClipboard]="'BSA= '+crClValue.toString()+' m²'" (click)="openSnackBar('BSA value copied!')">
+                                        <mat-icon>content_copy</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="calcbox bsa-box">
+                                <p class="calcbox-title">CrCl</p>
+                                <p><span>{{getCrCl(patientInfo)}}</span> mL/min</p>
+                                <div class="copy-to-clipboard">
+                                    <button mat-icon-button [cdkCopyToClipboard]="'CrCl= '+crClValue.toString()+' mL/min'" (click)="openSnackBar('CrCl value copied!')">
+                                        <mat-icon>content_copy</mat-icon>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+      </mat-tab-group> 
+</div>
+
 
