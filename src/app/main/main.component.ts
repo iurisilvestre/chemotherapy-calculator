@@ -122,18 +122,10 @@ export class MainComponent implements OnInit {
     }
   }
 
-  verifyCarboplatin(patienData: any) {
-    if (this.selectedDrugCarboplatin === true && patienData.auc > 0) {
-      this.setAucRequired = true;
-    } else {
-      this.setAucRequired = false;
-    }
-  }
-
   // Calc Functions
-  getBsa(patienData: any) {
-    let weight = Math.pow(patienData.weight, 0.425);
-    let height = Math.pow(patienData.height, 0.725);
+  getBsa(patientData: any) {
+    let weight = Math.pow(patientData.weight, 0.425);
+    let height = Math.pow(patientData.height, 0.725);
     this.bsaValue = Math.round(0.007184 * weight * height * 10) / 10;
     if (isNaN(this.bsaValue)) {
       this.bsaValue = 0;
@@ -141,14 +133,14 @@ export class MainComponent implements OnInit {
     return this.bsaValue;
   }
 
-  getCrCl(patienData: any) {
-    if (patienData.creatinine > 0) {
+  getCrCl(patientData: any) {
+    if (patientData.creatinine > 0) {
       let crClMale =
-        ((140 - patienData.age) * patienData.weight) /
-        (patienData.creatinine * 72);
-      if (patienData.genre === 'female') {
+        ((140 - patientData.age) * patientData.weight) /
+        (patientData.creatinine * 72);
+      if (patientData.genre === 'female') {
         this.crClValue = Math.round((crClMale * 0.85 * 10) / 10);
-      } else if (patienData.genre === 'male') {
+      } else if (patientData.genre === 'male') {
         this.crClValue = Math.round(crClMale * 10) / 10;
       }
       if (isNaN(this.crClValue)) {
@@ -160,20 +152,20 @@ export class MainComponent implements OnInit {
     }
   }
 
-  getCarboplatin(patienData: any): void {
-    let crCl = this.getCrCl(patienData);
-    if (this.selectedDrugCarboplatin === true && patienData.auc > 0) {
+  getCarboplatin(patientData: any): void {
+    let crCl = this.getCrCl(patientData);
+    if (this.selectedDrugCarboplatin === true && patientData.auc > 0) {
       if (crCl > 125) {
         crCl = 125;
       }
-      this.carboplatinValue = Math.round(patienData.auc * (crCl + 25));
+      this.carboplatinValue = Math.round(patientData.auc * (crCl + 25));
     } else {
       this.setAucRequired = true;
       this.carboplatinValue = 0;
     }
   }
 
-  getDose(patienData: any): void {
+  getDose(patientData: any): void {
     if (this.checkProperties(this.patientInfo)) {
       this.doseValue = [];
       if (this.selectedDrug > -1) {
@@ -181,9 +173,9 @@ export class MainComponent implements OnInit {
         let obj = this.selectedCancer[i].drugDoses;
         let calc;
         if (this.selectedCancer[i].bsaCalc === true) {
-          calc = this.getBsa(patienData);
+          calc = this.getBsa(patientData);
         } else {
-          calc = patienData.weight;
+          calc = patientData.weight;
         }
         for (let i = 0; i < obj.length; i++) {
           this.doseValue.push({
@@ -195,12 +187,12 @@ export class MainComponent implements OnInit {
     }
   }
 
-  getResults(patienData: any, event: any): void {
+  getResults(patientData: any, event: any): void {
     this.selectedDrug = event.value;
     this.selectedDrugCarboplatin = this.selectedCancer[
       event.value
     ].carboplatinCalc;
-    this.getDose(patienData);
+    this.getDose(patientData);
     this.getCarboplatin(this.patientInfo);
   }
 }

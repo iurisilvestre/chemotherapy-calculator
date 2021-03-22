@@ -11,7 +11,7 @@
                 <div class="input-boxes">
                     <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                         <mat-label>Age</mat-label>
-                        <input matInput type="number" required
+                        <input matInput type="number"
                         [(ngModel)]="patientInfo.age"
                         (input)="getDose(patientInfo)"
                         (input)="getCarboplatin(patientInfo)"
@@ -21,7 +21,7 @@
 
                     <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                         <mat-label>Height</mat-label>
-                        <input matInput type="number" required 
+                        <input matInput type="number"
                         [(ngModel)]="patientInfo.height"
                         (input)="getDose(patientInfo)"
                         (input)="getCarboplatin(patientInfo)"
@@ -31,7 +31,7 @@
 
                     <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                         <mat-label>Weight</mat-label>
-                        <input matInput type="number" required
+                        <input matInput type="number" 
                         [(ngModel)]="patientInfo.weight" 
                         (input)="getDose(patientInfo)"
                         (input)="getCarboplatin(patientInfo)"
@@ -41,7 +41,7 @@
 
                     <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                         <mat-label>Creatinine</mat-label>
-                        <input matInput type="number" required
+                        <input matInput type="number"
                         [(ngModel)]="patientInfo.creatinine"
                         onclick="this.select()"
                         (input)="getDose(patientInfo)"
@@ -134,7 +134,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="calcbox bsa-box">
+                        <div class="calcbox crcl-box">
                             <p class="calcbox-title">CrCl</p>
                             <p><span>{{getCrCl(patientInfo)}}</span> mL/min</p>
                             <div class="copy-to-clipboard">
@@ -167,7 +167,7 @@
                     <div class="input-boxes">
                         <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                             <mat-label>Age</mat-label>
-                            <input matInput type="number" required
+                            <input matInput type="number"
                             [(ngModel)]="patientInfo.age"
                             (input)="getDose(patientInfo)"
                             (input)="getCarboplatin(patientInfo)"
@@ -177,7 +177,7 @@
     
                         <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                             <mat-label>Height</mat-label>
-                            <input matInput type="number" required 
+                            <input matInput type="number"
                             [(ngModel)]="patientInfo.height"
                             (input)="getDose(patientInfo)"
                             (input)="getCarboplatin(patientInfo)"
@@ -187,7 +187,7 @@
     
                         <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                             <mat-label>Weight</mat-label>
-                            <input matInput type="number" required
+                            <input matInput type="number" 
                             [(ngModel)]="patientInfo.weight" 
                             (input)="getDose(patientInfo)"
                             (input)="getCarboplatin(patientInfo)"
@@ -197,7 +197,7 @@
     
                         <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                             <mat-label>Creatinine</mat-label>
-                            <input matInput type="number" required
+                            <input matInput type="number"
                             [(ngModel)]="patientInfo.creatinine"
                             onclick="this.select()"
                             (input)="getDose(patientInfo)"
@@ -205,8 +205,7 @@
                             <span matSuffix> mg/dL</span>
                         </mat-form-field>
     
-                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker
-                        (input)="getCarboplatin(patientInfo)">
+                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker (input)="getCarboplatin(patientInfo)">
                             <mat-label   mat-label>AUC</mat-label>
                             <input matInput type="number"
                             [required]="setAucRequired"
@@ -293,7 +292,7 @@
                                     </button>
                                 </div>
                             </div>
-                            <div class="calcbox bsa-box">
+                            <div class="calcbox crcl-box">
                                 <p class="calcbox-title">CrCl</p>
                                 <p><span>{{getCrCl(patientInfo)}}</span> mL/min</p>
                                 <div class="copy-to-clipboard">
