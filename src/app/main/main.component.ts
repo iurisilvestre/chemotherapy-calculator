@@ -32,6 +32,9 @@ export class MainComponent implements OnInit {
   carboplatinValue: number = 0;
   doseValue: any = [];
 
+  cancerSelected = '';
+  regimenSelected = '';
+
   setAucRequired: boolean = false;
 
   patientInfo = {
@@ -47,6 +50,7 @@ export class MainComponent implements OnInit {
 
   selectCancer(event: any): void {
     this.selectedCancer = this.cancerList[event.value].regimen;
+    this.regimenSelected = '';
   }
 
   resetPatientInfo(): void {
@@ -69,7 +73,10 @@ export class MainComponent implements OnInit {
   }
 
   allowSelectCancers(): void {
-    if (this.bsaValue > 0 && this.patientInfo.genre !== '') {
+    if (
+      this.checkProperties(this.patientInfo) &&
+      this.patientInfo.genre !== ''
+    ) {
       this.selectCancersDisabled = false;
     } else {
       this.selectCancersDisabled = true;
@@ -157,11 +164,12 @@ export class MainComponent implements OnInit {
   }
 
   getCarboplatin(patienData: any): void {
+    let crCl = this.getCrCl(patienData);
     if (this.selectedDrugCarboplatin === true && patienData.auc > 0) {
-      if (this.crClValue > 125) {
-        this.crClValue = 125;
+      if (crCl > 125) {
+        crCl = 125;
       }
-      this.carboplatinValue = patienData.auc * (this.crClValue + 25);
+      this.carboplatinValue = Math.round(patienData.auc * (crCl + 25));
     } else {
       this.setAucRequired = true;
       this.carboplatinValue = 0;
@@ -169,22 +177,21 @@ export class MainComponent implements OnInit {
   }
 
   getDose(patienData: any): void {
-    if (this.checkProperties(patienData)) {
+    if (this.checkProperties(this.patientInfo)) {
       this.doseValue = [];
-
       if (this.selectedDrug > -1) {
         let i = this.selectedDrug;
         let obj = this.selectedCancer[i].drugDoses;
         let calc;
         if (this.selectedCancer[i].bsaCalc === true) {
-          calc = this.bsaValue;
+          calc = this.getBsa(patienData);
         } else {
           calc = patienData.weight;
         }
         for (let i = 0; i < obj.length; i++) {
           this.doseValue.push({
             drug: obj[i].drug,
-            dose: obj[i].dose * calc,
+            dose: Math.round(obj[i].dose * calc),
           });
         }
       }

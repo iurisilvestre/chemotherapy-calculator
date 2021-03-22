@@ -3,8 +3,10 @@
             <h3>Insert Patient Info</h3>
             <div class="patient-info">
                 <mat-button-toggle-group name="fontStyle" [(ngModel)]="patientInfo.genre">
-                    <mat-button-toggle class="btn-toggle" value="male">Male</mat-button-toggle>
-                    <mat-button-toggle class="btn-toggle" value="female">Female</mat-button-toggle>
+                    <mat-button-toggle class="btn-toggle" value="male" 
+                    (click)="getCarboplatin(patientInfo)">Male</mat-button-toggle>
+                    <mat-button-toggle class="btn-toggle" value="female" 
+                    (click)="getCarboplatin(patientInfo)">Female</mat-button-toggle>
                 </mat-button-toggle-group>
                 <div class="input-boxes">
                     <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
@@ -21,13 +23,18 @@
                         <input matInput type="number" required 
                         [(ngModel)]="patientInfo.height"
                         (input)="getDose(patientInfo)"
+                        (input)="getCarboplatin(patientInfo)"
                         onclick="this.select()">
                         <span matSuffix> cm</span>
                     </mat-form-field>
 
                     <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                         <mat-label>Weight</mat-label>
-                        <input matInput type="number" [(ngModel)]="patientInfo.weight" required (input)="getDose(patientInfo)" onclick="this.select()">
+                        <input matInput type="number" required
+                        [(ngModel)]="patientInfo.weight" 
+                        (input)="getDose(patientInfo)"
+                        (input)="getCarboplatin(patientInfo)"
+                        onclick="this.select()">
                         <span matSuffix> kg</span>
                     </mat-form-field>
 
@@ -36,7 +43,8 @@
                         <input matInput type="number" required
                         [(ngModel)]="patientInfo.creatinine"
                         onclick="this.select()"
-                        (input)="getDose(patientInfo)">
+                        (input)="getDose(patientInfo)"
+                        (input)="getCarboplatin(patientInfo)">
                         <span matSuffix> mg/dL</span>
                     </mat-form-field>
 
@@ -66,6 +74,7 @@
                 <mat-form-field appearance="fill" class="select-form">
                     <mat-label>Select Cancer</mat-label>
                     <mat-select class="select" 
+                    [(value)]="cancerSelected"
                     (selectionChange)="selectCancer($event)" 
                     [disabled]="selectCancersDisabled">
                         <mat-option disabled>Select Cancer</mat-option>
@@ -81,7 +90,7 @@
                 <mat-form-field appearance="fill" class="select-form">
                     <mat-label>Select Regimen</mat-label>
                     <mat-select class="select" 
-                    disableOptionCentering="true"
+                    [(value)]="regimenSelected"
                     (selectionChange)="getResults(patientInfo, $event)"
                     defaultTabIndex="0"
                     [disabled]="allowSelectRegimen()">
@@ -149,8 +158,10 @@
                 <h3>Insert Patient Info</h3>
                 <div class="patient-info">
                     <mat-button-toggle-group name="fontStyle" [(ngModel)]="patientInfo.genre">
-                        <mat-button-toggle class="btn-toggle" value="male">Male</mat-button-toggle>
-                        <mat-button-toggle class="btn-toggle" value="female">Female</mat-button-toggle>
+                        <mat-button-toggle class="btn-toggle" value="male" 
+                        (click)="getCarboplatin(patientInfo)">Male</mat-button-toggle>
+                        <mat-button-toggle class="btn-toggle" value="female" 
+                        (click)="getCarboplatin(patientInfo)">Female</mat-button-toggle>
                     </mat-button-toggle-group>
                     <div class="input-boxes">
                         <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
@@ -158,6 +169,7 @@
                             <input matInput type="number" required
                             [(ngModel)]="patientInfo.age"
                             (input)="getDose(patientInfo)"
+                            (input)="getCarboplatin(patientInfo)"
                             onclick="this.select()">
                             <span matSuffix> years</span>
                         </mat-form-field>
@@ -167,13 +179,18 @@
                             <input matInput type="number" required 
                             [(ngModel)]="patientInfo.height"
                             (input)="getDose(patientInfo)"
+                            (input)="getCarboplatin(patientInfo)"
                             onclick="this.select()">
                             <span matSuffix> cm</span>
                         </mat-form-field>
     
                         <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker>
                             <mat-label>Weight</mat-label>
-                            <input matInput type="number" [(ngModel)]="patientInfo.weight" required (input)="getDose(patientInfo)" onclick="this.select()">
+                            <input matInput type="number" required
+                            [(ngModel)]="patientInfo.weight" 
+                            (input)="getDose(patientInfo)"
+                            (input)="getCarboplatin(patientInfo)"
+                            onclick="this.select()">
                             <span matSuffix> kg</span>
                         </mat-form-field>
     
@@ -182,11 +199,13 @@
                             <input matInput type="number" required
                             [(ngModel)]="patientInfo.creatinine"
                             onclick="this.select()"
-                            (input)="getDose(patientInfo)">
+                            (input)="getDose(patientInfo)"
+                            (input)="getCarboplatin(patientInfo)">
                             <span matSuffix> mg/dL</span>
                         </mat-form-field>
     
-                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker (input)="getCarboplatin(patientInfo)">
+                        <mat-form-field class="patient-input" appearance="outline" hideRequiredMarker
+                        (input)="getCarboplatin(patientInfo)">
                             <mat-label   mat-label>AUC</mat-label>
                             <input matInput type="number"
                             [required]="setAucRequired"
@@ -214,6 +233,7 @@
                     <mat-form-field appearance="fill" class="select-form">
                         <mat-label>Select Cancer</mat-label>
                         <mat-select class="select" 
+                        [(value)]="cancerSelected"
                         (selectionChange)="selectCancer($event)" 
                         [disabled]="selectCancersDisabled">
                             <mat-option disabled>Select Cancer</mat-option>
@@ -229,7 +249,7 @@
                     <mat-form-field appearance="fill" class="select-form">
                         <mat-label>Select Regimen</mat-label>
                         <mat-select class="select" 
-                        disableOptionCentering="true"
+                        [(value)]="regimenSelected"
                         (selectionChange)="getResults(patientInfo, $event)"
                         defaultTabIndex="0"
                         [disabled]="allowSelectRegimen()">
