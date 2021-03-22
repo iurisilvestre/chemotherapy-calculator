@@ -73,10 +73,7 @@ export class MainComponent implements OnInit {
   }
 
   allowSelectCancers(): void {
-    if (
-      this.checkProperties(this.patientInfo) &&
-      this.patientInfo.genre !== ''
-    ) {
+    if (this.checkProperties(this.patientInfo)) {
       this.selectCancersDisabled = false;
     } else {
       this.selectCancersDisabled = true;
