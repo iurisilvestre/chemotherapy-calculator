@@ -56,6 +56,11 @@ export class MainComponent implements OnInit {
   resetPatientInfo(): void {
     this.selectCancersDisabled = true;
     this.selectedCancer = null;
+    this.doseValue = [];
+    this.carboplatinValue = 0;
+    this.selectedDrug = null;
+    this.selectedDrugCarboplatin = null;
+    this.setAucRequired = false;
     this.patientInfo = {
       genre: '',
       age: null,
@@ -64,12 +69,6 @@ export class MainComponent implements OnInit {
       creatinine: null,
       auc: null,
     };
-
-    this.doseValue = [];
-    this.carboplatinValue = 0;
-    this.selectedDrug = 0;
-    this.selectedDrugCarboplatin = 0;
-    this.setAucRequired = false;
   }
 
   allowSelectCancers(): void {
@@ -159,8 +158,9 @@ export class MainComponent implements OnInit {
         crCl = 125;
       }
       this.carboplatinValue = Math.round(patientData.auc * (crCl + 25));
-    } else {
+    } else if (this.selectedDrugCarboplatin === true) {
       this.setAucRequired = true;
+    } else {
       this.carboplatinValue = 0;
     }
   }
@@ -187,12 +187,16 @@ export class MainComponent implements OnInit {
     }
   }
 
-  getResults(patientData: any, event: any): void {
+  getResults(): void {
+    this.getDose(this.patientInfo);
+    this.getCarboplatin(this.patientInfo);
+  }
+
+  setSelectedDrug(event: any): void {
     this.selectedDrug = event.value;
     this.selectedDrugCarboplatin = this.selectedCancer[
       event.value
     ].carboplatinCalc;
-    this.getDose(patientData);
-    this.getCarboplatin(this.patientInfo);
+    this.getResults();
   }
 }
