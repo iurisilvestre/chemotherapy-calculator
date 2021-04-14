@@ -21,7 +21,7 @@
     0 30.3px 23.9px rgba(0, 0, 0, 0.048), 0 100px 107px rgba(0, 0, 0, 0.08);
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 600px) {
   .title {
     text-align: center;
     padding: 0;

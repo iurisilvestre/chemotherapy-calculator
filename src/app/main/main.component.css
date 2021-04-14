@@ -135,8 +135,8 @@ h3 {
   .main-container-mobile {
     display: flex;
     justify-content: center;
-    width: 400px;
-    height: 550px;
+    width: 350px;
+    height: 600px;
   }
 
   h3 {

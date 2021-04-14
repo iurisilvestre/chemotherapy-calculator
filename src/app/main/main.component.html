@@ -57,7 +57,7 @@
                 </div>
                 <button mat-icon-button 
                 matTooltip="Clear values" matTooltipPosition="right"
-                (click)="resetPatientInfo()" 
+                (click)="resetData()" 
                 (click)="openSnackBar('Values cleared!')">
                     <mat-icon>replay</mat-icon>
                 </button>
@@ -88,7 +88,7 @@
                     <mat-select class="select" 
                     [(value)]="regimenSelected"
                     (selectionChange)="setSelectedDrug($event)"
-                    defaultTabIndex="0"
+                    
                     [disabled]="allowSelectRegimen()">
                         <mat-option disabled>Select Regimen</mat-option>
                             <mat-option *ngFor="let drug of selectedCancer; index as i"
@@ -208,7 +208,7 @@
                     </div>
                     <button mat-icon-button 
                     matTooltip="Clear values" matTooltipPosition="right"
-                    (click)="resetPatientInfo()" 
+                    (click)="resetData()" 
                     (click)="openSnackBar('Values cleared!')">
                         <mat-icon>replay</mat-icon>
                     </button>
@@ -241,7 +241,7 @@
                         <mat-select class="select" 
                         [(value)]="regimenSelected"
                         (selectionChange)="setSelectedDrug($event)"
-                        defaultTabIndex="0"
+                        
                         [disabled]="allowSelectRegimen()">
                             <mat-option disabled>Select Regimen</mat-option>
                                 <mat-option *ngFor="let drug of selectedCancer; index as i"

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { cancerList } from '../cancers-list';
-import { interval } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Patient } from '../patient';
 
 @Component({
   selector: 'app-main',
@@ -11,16 +11,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class MainComponent implements OnInit {
   constructor(private _snackBar: MatSnackBar) {}
 
-  ngOnInit(): void {
-    interval(500).subscribe(() => {
-      this.allowSelectCancers();
-    });
-  }
+  ngOnInit(): void {}
 
   // Globals
 
   cancerList: any = cancerList;
-  cancerType: any;
 
   selectCancersDisabled = true;
   selectedCancer: any;
@@ -37,13 +32,13 @@ export class MainComponent implements OnInit {
 
   setAucRequired: boolean = false;
 
-  patientInfo = {
+  patientInfo: Patient = {
     genre: '',
-    age: null,
-    height: null,
-    weight: null,
-    creatinine: null,
-    auc: null,
+    age: 0,
+    height: 0,
+    weight: 0,
+    creatinine: 0,
+    auc: 0,
   };
 
   // Settings Functions and Dependencies
@@ -53,7 +48,8 @@ export class MainComponent implements OnInit {
     this.regimenSelected = '';
   }
 
-  resetPatientInfo(): void {
+  resetData(): void {
+    this.cancerSelected = '';
     this.selectCancersDisabled = true;
     this.selectedCancer = null;
     this.doseValue = [];
@@ -63,11 +59,11 @@ export class MainComponent implements OnInit {
     this.setAucRequired = false;
     this.patientInfo = {
       genre: '',
-      age: null,
-      height: null,
-      weight: null,
-      creatinine: null,
-      auc: null,
+      age: 0,
+      height: 0,
+      weight: 0,
+      creatinine: 0,
+      auc: 0,
     };
   }
 
@@ -188,6 +184,7 @@ export class MainComponent implements OnInit {
   }
 
   getResults(): void {
+    this.allowSelectCancers();
     this.getDose(this.patientInfo);
     this.getCarboplatin(this.patientInfo);
   }
