@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { cancerList } from '../cancers-list';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Patient } from '../patient';
 
 @Component({
   selector: 'app-main',
@@ -15,7 +14,7 @@ export class MainComponent implements OnInit {
 
   // Globals
 
-  cancerList: any = cancerList;
+  cancerList = cancerList;
 
   selectCancersDisabled = true;
   selectedCancer: any;
@@ -27,29 +26,29 @@ export class MainComponent implements OnInit {
   carboplatinValue: number = 0;
   doseValue: any = [];
 
-  cancerSelected = '';
-  regimenSelected = '';
+  cancerSelected: number = 0;
+  regimenSelected: number = 0;
 
   setAucRequired: boolean = false;
 
-  patientInfo: Patient = {
+  patientInfo = {
     genre: '',
-    age: 0,
-    height: 0,
-    weight: 0,
-    creatinine: 0,
-    auc: 0,
+    age: null,
+    height: null,
+    weight: null,
+    creatinine: null,
+    auc: null,
   };
 
   // Settings Functions and Dependencies
 
   selectCancer(event: any): void {
     this.selectedCancer = this.cancerList[event.value].regimen;
-    this.regimenSelected = '';
+    this.regimenSelected = 0;
   }
 
   resetData(): void {
-    this.cancerSelected = '';
+    this.cancerSelected = 0;
     this.selectCancersDisabled = true;
     this.selectedCancer = null;
     this.doseValue = [];
@@ -59,11 +58,11 @@ export class MainComponent implements OnInit {
     this.setAucRequired = false;
     this.patientInfo = {
       genre: '',
-      age: 0,
-      height: 0,
-      weight: 0,
-      creatinine: 0,
-      auc: 0,
+      age: null,
+      height: null,
+      weight: null,
+      creatinine: null,
+      auc: null,
     };
   }
 
