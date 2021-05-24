@@ -73,7 +73,7 @@
                     [(value)]="cancerSelected"
                     (selectionChange)="selectCancer($event)" 
                     [disabled]="selectCancersDisabled">
-                        <mat-option disabled>Select Cancer</mat-option>
+                        <mat-option disabled selected>Select Cancer</mat-option>
                         <div *ngIf="!selectCancersDisabled">
                             <mat-option *ngFor="let cancer of cancerList; index as i"
                             [value]="i">

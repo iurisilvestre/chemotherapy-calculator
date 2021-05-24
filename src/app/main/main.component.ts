@@ -120,7 +120,7 @@ export class MainComponent implements OnInit {
   getBsa(patientData: any) {
     let weight = Math.pow(patientData.weight, 0.425);
     let height = Math.pow(patientData.height, 0.725);
-    this.bsaValue = Math.round(0.007184 * weight * height * 10) / 10;
+    this.bsaValue = Math.round(0.007184 * weight * height * 100) / 100;
     if (isNaN(this.bsaValue)) {
       this.bsaValue = 0;
     }
@@ -161,7 +161,7 @@ export class MainComponent implements OnInit {
   }
 
   getDose(patientData: any): void {
-    if (this.checkProperties(this.patientInfo)) {
+    if (this.checkProperties(patientData)) {
       this.doseValue = [];
       if (this.selectedDrug > -1) {
         let i = this.selectedDrug;
@@ -190,9 +190,8 @@ export class MainComponent implements OnInit {
 
   setSelectedDrug(event: any): void {
     this.selectedDrug = event.value;
-    this.selectedDrugCarboplatin = this.selectedCancer[
-      event.value
-    ].carboplatinCalc;
+    this.selectedDrugCarboplatin =
+      this.selectedCancer[event.value].carboplatinCalc;
     this.getResults();
   }
 }
