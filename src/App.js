@@ -1,7 +1,7 @@
-import { CoursesSchemes } from "./coursesScheme";
+import { CoursesSchemes } from "./CoursesSchemes.js";
 
 import PatientInfo from "./components/PatientInfo";
-import CourseSchemes from "./components/CourseSchemes";
+import SchemesSelection from "./components/SchemesSelection";
 import Results from "./components/Results";
 
 import "./App.css";
@@ -11,7 +11,7 @@ function App() {
     <div className="app">
       <h1>Chemotherapy Calculator</h1>
       <PatientInfo />
-      <CourseSchemes coursesschemes={CourseSchemes} />
+      <SchemesSelection drugsList={CoursesSchemes} />
       <Results />
     </div>
   );
