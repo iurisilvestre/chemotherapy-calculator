@@ -1,7 +1,7 @@
 export const CoursesSchemes = [
   {
     type: "Breast Cancer",
-    regimen: [
+    regimens: [
       {
         courseScheme: "Paclitaxel 80mg/m²",
         drugDoses: [{ drug: "Paclitaxel: ", dose: 80 }],
@@ -36,7 +36,7 @@ export const CoursesSchemes = [
   },
   {
     type: "Lung Cancer - NSCLC",
-    regimen: [
+    regimens: [
       {
         courseScheme: "Carboplatin + Paclitaxel 200mg/m²",
         drugDoses: [{ drug: "Paclitaxel: ", dose: 200 }],
@@ -53,7 +53,7 @@ export const CoursesSchemes = [
   },
   {
     type: "Lung Cancer - SCLC",
-    regimen: [
+    regimens: [
       {
         courseScheme: "Caboplatin + Etoposide 100mg/m²",
         drugDoses: [{ drug: "Etoposide: ", dose: 100 }],
@@ -73,7 +73,7 @@ export const CoursesSchemes = [
   },
   {
     type: "Colorectal Cancer",
-    regimen: [
+    regimens: [
       {
         courseScheme: "mFOLFOX6",
         drugDoses: [
