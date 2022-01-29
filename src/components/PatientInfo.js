@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-const PatientInfo = (props) => {
-  // Patient form data object
+export default function PatientInfo(props) {
+  // PATIENT FORM DATA OBJECT
   const patientData = {
     genre: "",
     age: "",
@@ -12,6 +12,7 @@ const PatientInfo = (props) => {
   };
   const [formData, setFormData] = useState(patientData);
 
+  // SETTING FORM DATA
   const handleChangeInputs = (event) => {
     const { name, value, type } = event.target;
 
@@ -22,6 +23,7 @@ const PatientInfo = (props) => {
     props.onChangeInputs(formData);
   };
 
+  // RESET FORM DATA OBJECT
   const handleReset = () => {
     setFormData(patientData);
   };
@@ -57,6 +59,7 @@ const PatientInfo = (props) => {
           type="number"
           name="age"
           value={formData.age}
+          min="0"
           onChange={handleChangeInputs}
         />
       </div>
@@ -67,6 +70,7 @@ const PatientInfo = (props) => {
           type="number"
           name="height"
           value={formData.height}
+          min="0"
           onChange={handleChangeInputs}
         />
       </div>
@@ -77,6 +81,7 @@ const PatientInfo = (props) => {
           type="number"
           name="weight"
           value={formData.weight}
+          min="0"
           onChange={handleChangeInputs}
         />
       </div>
@@ -87,6 +92,7 @@ const PatientInfo = (props) => {
           type="number"
           name="creatinine"
           value={formData.creatinine}
+          min="0"
           onChange={handleChangeInputs}
         />
       </div>
@@ -97,6 +103,7 @@ const PatientInfo = (props) => {
           type="number"
           name="auc"
           value={formData.auc}
+          min="0"
           onChange={handleChangeInputs}
         />
       </div>
@@ -105,6 +112,4 @@ const PatientInfo = (props) => {
       </button>
     </div>
   );
-};
-
-export default PatientInfo;
+}

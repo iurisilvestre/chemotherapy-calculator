@@ -2,12 +2,10 @@ import React, { useState } from "react";
 
 export default function SchemesSelection(props) {
   const [selectedCancer, setSelectedCancer] = useState(null);
-  const [isSelectCancerDisabled, setIsSelectCancerDisabled] = useState(false);
   const [isSelectRegimenDisabled, setIsSelectRegimenDisabled] = useState(false);
 
   const handleSelectCancer = (event) => {
     setSelectedCancer(event.target.value);
-    setIsSelectCancerDisabled(true);
   };
 
   const handleSelectRegimen = (event) => {
