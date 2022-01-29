@@ -9,21 +9,28 @@ import Results from "./components/Results";
 import "./App.css";
 
 export default function App() {
+  const [patientInfo, setPatientInfo] = useState({});
   const [selectedRegimen, setSelectedRegimen] = useState("");
+
+  const handleInputs = (formData) => {
+    setPatientInfo(formData);
+  };
 
   const handleSelectRegiment = (regimenIndex) => {
     setSelectedRegimen(regimenIndex);
   };
 
+  console.log(patientInfo);
+
   return (
     <div className="app">
       <h1>Chemotherapy Calculator</h1>
-      <PatientInfo />
+      <PatientInfo onChangeInputs={handleInputs} />
       <SchemesSelection
         drugsList={CoursesSchemes}
         onSelectRegiment={handleSelectRegiment}
       />
-      <Results />
+      <Results selectedRegimen={selectedRegimen} patientInfo={patientInfo} />
     </div>
   );
 }
