@@ -1,24 +1,41 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Results(props) {
   const getBsa = (patientData) => {
     const weight = Math.pow(patientData.weight, 0.425);
     const height = Math.pow(patientData.height, 0.725);
     let bsaValue = Math.round(0.007184 * weight * height * 100) / 100;
-    if (isNaN(bsaValue)) {
-      bsaValue = 0;
-    }
     return bsaValue;
   };
+
+  const getCrCl = (patientData) => {
+    let crClValue;
+    if (patientData.creatinine > 0) {
+      let crClMale =
+        ((140 - patientData.age) * patientData.weight) /
+        (patientData.creatinine * 72);
+      if (patientData.genre === "female") {
+        crClValue = Math.round((crClMale * 0.85 * 10) / 10);
+      } else if (patientData.genre === "male") {
+        crClValue = Math.round(crClMale * 10) / 10;
+      }
+      if (isNaN(crClValue)) {
+        crClValue = 0;
+      }
+      return crClValue;
+    }
+  };
+
+  const getDose = (patientData, coursesSchemes, selectedRegimen) => {};
 
   return (
     <div className="results">
       <h2>Results</h2>
       <p className="results-claculations">Results here</p>
       <h3>BSA</h3>
-      <p>{getBsa(props.patientInfo)}</p>
+      <p>{getBsa(props.patientInfo) || 0} m²</p>
       <h3>CrCL</h3>
-      <p>CrCl Value</p>
+      <p>{getCrCl(props.patientInfo) || 0} mL/min</p>
     </div>
   );
 }

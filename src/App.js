@@ -20,8 +20,6 @@ export default function App() {
     setSelectedRegimen(regimenIndex);
   };
 
-  console.log(patientInfo);
-
   return (
     <div className="app">
       <h1>Chemotherapy Calculator</h1>
@@ -30,7 +28,11 @@ export default function App() {
         drugsList={CoursesSchemes}
         onSelectRegiment={handleSelectRegiment}
       />
-      <Results selectedRegimen={selectedRegimen} patientInfo={patientInfo} />
+      <Results
+        selectedRegimen={selectedRegimen}
+        patientInfo={patientInfo}
+        CoursesSchemes={CoursesSchemes}
+      />
     </div>
   );
 }
