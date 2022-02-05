@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { CoursesSchemes } from "./CoursesSchemes.js";
 
@@ -12,8 +12,14 @@ export default function App() {
   const [patientInfo, setPatientInfo] = useState({});
   const [selectedRegimen, setSelectedRegimen] = useState("");
 
-  const handleInputs = (formData) => {
-    setPatientInfo(formData);
+  const handleInputs = (event) => {
+    const { name, value, type } = event.target;
+    setPatientInfo((prevFormData) => {
+      return {
+        ...prevFormData,
+        [name]: type === "number" ? Number(value) : value,
+      };
+    });
   };
 
   const handleSelectRegiment = (regimenIndex) => {
@@ -23,16 +29,12 @@ export default function App() {
   return (
     <div className="app">
       <h1>Chemotherapy Calculator</h1>
-      <PatientInfo onChangeInputs={handleInputs} />
+      <PatientInfo onChangeInputs={handleInputs} patientInfo={patientInfo} />
       <SchemesSelection
         drugsList={CoursesSchemes}
         onSelectRegiment={handleSelectRegiment}
       />
-      <Results
-        selectedRegimen={selectedRegimen}
-        patientInfo={patientInfo}
-        CoursesSchemes={CoursesSchemes}
-      />
+      <Results patientInfo={patientInfo} selectedRegimen={selectedRegimen} />
     </div>
   );
 }

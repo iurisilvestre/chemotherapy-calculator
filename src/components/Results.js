@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function Results(props) {
+  const [crclValue, setCrclValue] = useState();
+  const [bsaValue, setBsaValue] = useState();
+
   const getBsa = (patientData) => {
     const weight = Math.pow(patientData.weight, 0.425);
     const height = Math.pow(patientData.height, 0.725);
@@ -28,14 +31,19 @@ export default function Results(props) {
 
   const getDose = (patientData, coursesSchemes, selectedRegimen) => {};
 
+  useEffect(() => {
+    setBsaValue(getBsa(props.patientInfo));
+    setCrclValue(getCrCl(props.patientInfo));
+  }, [props.patientInfo]);
+
   return (
     <div className="results">
       <h2>Results</h2>
       <p className="results-claculations">Results here</p>
       <h3>BSA</h3>
-      <p>{getBsa(props.patientInfo) || 0} m²</p>
+      <p>{bsaValue} m²</p>
       <h3>CrCL</h3>
-      <p>{getCrCl(props.patientInfo) || 0} mL/min</p>
+      <p>{crclValue} mL/min</p>
     </div>
   );
 }
