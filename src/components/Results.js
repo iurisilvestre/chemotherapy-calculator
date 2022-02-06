@@ -41,9 +41,9 @@ export default function Results(props) {
       <h2>Results</h2>
       <p className="results-claculations">Results here</p>
       <h3>BSA</h3>
-      <p>{bsaValue} m²</p>
+      <p>{bsaValue || 0} m²</p>
       <h3>CrCL</h3>
-      <p>{crclValue} mL/min</p>
+      <p>{crclValue || 0} mL/min</p>
     </div>
   );
 }

@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 export default function PatientInfo(props) {
   // RESET FORM DATA OBJECT
-  const handleReset = () => {};
 
   return (
     <div className="patient-info">
@@ -83,7 +82,7 @@ export default function PatientInfo(props) {
           onChange={props.onChangeInputs}
         />
       </div>
-      <button type="button" onClick={handleReset}>
+      <button type="button" onClick={props.onReset}>
         Reset
       </button>
     </div>

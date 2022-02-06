@@ -9,7 +9,16 @@ import Results from "./components/Results";
 import "./App.css";
 
 export default function App() {
-  const [patientInfo, setPatientInfo] = useState({});
+  const patientCleanData = {
+    genre: "",
+    age: "",
+    height: "",
+    weight: "",
+    creatinine: "",
+    auc: "",
+  };
+
+  const [patientInfo, setPatientInfo] = useState(patientCleanData);
   const [selectedRegimen, setSelectedRegimen] = useState("");
 
   const handleInputs = (event) => {
@@ -22,6 +31,10 @@ export default function App() {
     });
   };
 
+  const handleReset = () => {
+    setPatientInfo(patientCleanData);
+  };
+
   const handleSelectRegiment = (regimenIndex) => {
     setSelectedRegimen(regimenIndex);
   };
@@ -29,7 +42,11 @@ export default function App() {
   return (
     <div className="app">
       <h1>Chemotherapy Calculator</h1>
-      <PatientInfo onChangeInputs={handleInputs} patientInfo={patientInfo} />
+      <PatientInfo
+        onChangeInputs={handleInputs}
+        onReset={handleReset}
+        patientInfo={patientInfo}
+      />
       <SchemesSelection
         drugsList={CoursesSchemes}
         onSelectRegiment={handleSelectRegiment}
