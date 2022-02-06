@@ -52,6 +52,7 @@ export default function App() {
         patientInfo={patientInfo}
       />
       <SchemesSelection
+        patientInfo={patientInfo}
         drugsList={CoursesSchemes}
         onSelectRegiment={handleSelectRegiment}
       />
