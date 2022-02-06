@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 export default function Results(props) {
-<<<<<<< HEAD
   const [crclValue, setCrclValue] = useState();
   const [bsaValue, setBsaValue] = useState();
 
@@ -37,22 +36,14 @@ export default function Results(props) {
     setCrclValue(getCrCl(props.patientInfo));
   }, [props.patientInfo]);
 
-=======
->>>>>>> 57fe928 (crate formulas js file)
   return (
     <div className="results">
       <h2>Results</h2>
       <p className="results-claculations">Results here</p>
       <h3>BSA</h3>
-<<<<<<< HEAD
       <p>{bsaValue} m²</p>
       <h3>CrCL</h3>
       <p>{crclValue} mL/min</p>
-=======
-      <p>{props.bsaValue} m²</p>
-      <h3>CrCL</h3>
-      <p>{props.crclValue} mL/min</p>
->>>>>>> 57fe928 (crate formulas js file)
     </div>
   );
 }

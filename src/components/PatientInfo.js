@@ -67,14 +67,9 @@ export default function PatientInfo(props) {
         <input
           type="number"
           name="creatinine"
-<<<<<<< HEAD
           value={props.patientInfo.creatinine}
           min="0"
           onChange={props.onChangeInputs}
-=======
-          value={formData.creatinine}
-          onChange={handleChangeInputs}
->>>>>>> 57fe928 (crate formulas js file)
         />
       </div>
       {/* INPUTS AUC */}
