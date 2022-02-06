@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function PatientInfo(props) {
-  // RESET FORM DATA OBJECT
-
   return (
     <div className="patient-info">
       <h2>1. Insert Patient Info</h2>

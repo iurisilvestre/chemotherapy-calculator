@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { CoursesSchemes } from "./CoursesSchemes.js";
 
@@ -19,7 +19,7 @@ export default function App() {
   };
 
   const [patientInfo, setPatientInfo] = useState(patientCleanData);
-  const [selectedRegimen, setSelectedRegimen] = useState("");
+  const [selectedScheme, setSelectedScheme] = useState({});
 
   const handleInputs = (event) => {
     const { name, value, type } = event.target;
@@ -33,10 +33,14 @@ export default function App() {
 
   const handleReset = () => {
     setPatientInfo(patientCleanData);
+    setSelectedScheme({});
   };
 
-  const handleSelectRegiment = (regimenIndex) => {
-    setSelectedRegimen(regimenIndex);
+  const handleSelectRegiment = (cancerIndex, regimenIndex) => {
+    setSelectedScheme({
+      cancer: Number(cancerIndex),
+      regimen: Number(regimenIndex),
+    });
   };
 
   return (
@@ -51,7 +55,11 @@ export default function App() {
         drugsList={CoursesSchemes}
         onSelectRegiment={handleSelectRegiment}
       />
-      <Results patientInfo={patientInfo} selectedRegimen={selectedRegimen} />
+      <Results
+        patientInfo={patientInfo}
+        selectedScheme={selectedScheme}
+        coursesSchemes={CoursesSchemes}
+      />
     </div>
   );
 }

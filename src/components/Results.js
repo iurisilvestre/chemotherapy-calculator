@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function Results(props) {
   const [crclValue, setCrclValue] = useState();
   const [bsaValue, setBsaValue] = useState();
+  const [doseValue, setDoseValue] = useState([]);
 
   const getBsa = (patientData) => {
     const weight = Math.pow(patientData.weight, 0.425);
@@ -29,17 +30,56 @@ export default function Results(props) {
     }
   };
 
-  const getDose = (patientData, coursesSchemes, selectedRegimen) => {};
+  const getDose = (patientData, coursesSchemes, selectedScheme) => {
+    // if we have a selected scheme
+    if (Object.keys(selectedScheme).length > 0) {
+      const result = [];
+      let calc;
+
+      console.log(patientData, coursesSchemes, selectedScheme);
+      const scheme =
+        coursesSchemes[selectedScheme.cancer].regimens[selectedScheme.regimen];
+
+      if (scheme.bsaCalc) {
+        calc = bsaValue;
+      } else {
+        calc = patientData.weight;
+      }
+
+      for (let i = 0; i < scheme.drugDoses.length; i++) {
+        result.push({
+          drug: scheme.drugDoses[i].drug,
+          dose: Math.round(scheme.drugDoses[i].dose * calc),
+        });
+      }
+      return result;
+    }
+  };
 
   useEffect(() => {
     setBsaValue(getBsa(props.patientInfo));
     setCrclValue(getCrCl(props.patientInfo));
+    setDoseValue(
+      getDose(props.patientInfo, props.coursesSchemes, props.selectedScheme)
+    );
   }, [props.patientInfo]);
+
+  useEffect(() => {
+    setDoseValue(
+      getDose(props.patientInfo, props.coursesSchemes, props.selectedScheme)
+    );
+  }, [props.selectedScheme]);
 
   return (
     <div className="results">
       <h2>Results</h2>
-      <p className="results-claculations">Results here</p>
+      {doseValue &&
+        doseValue.map((item, index) => (
+          <p key={index}>
+            {item.drug}
+            {item.dose}
+          </p>
+        ))}
       <h3>BSA</h3>
       <p>{bsaValue || 0} m²</p>
       <h3>CrCL</h3>

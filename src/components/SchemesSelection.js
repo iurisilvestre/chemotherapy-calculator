@@ -10,7 +10,8 @@ export default function SchemesSelection(props) {
 
   const handleSelectRegimen = (event) => {
     setIsSelectRegimenDisabled(true);
-    props.onSelectRegiment(event.target.value);
+    const regimenIndex = event.target.value;
+    props.onSelectRegiment(selectedCancer, regimenIndex);
   };
 
   return (
@@ -32,8 +33,8 @@ export default function SchemesSelection(props) {
       >
         <option disabled={isSelectRegimenDisabled}>Select Regimen</option>
         {selectedCancer &&
-          props.drugsList[selectedCancer].regimens.map((item, regimenIndex) => (
-            <option key={regimenIndex} value={regimenIndex}>
+          props.drugsList[selectedCancer].regimens.map((item, index) => (
+            <option key={item.id} value={index}>
               {item.courseScheme}
             </option>
           ))}
