@@ -35,9 +35,9 @@ export default function SchemesSelection(props) {
         disabled={!checkPatientData(props.patientInfo)}
       >
         <option disabled={selectedCancer}>Select Cancer</option>
-        {props.drugsList.map((drug, cancerIndex) => (
-          <option key={cancerIndex} value={cancerIndex}>
-            {drug.type}
+        {Object.keys(props.drugsList).map((cancer, cancerIndex) => (
+          <option key={cancerIndex} value={cancer}>
+            {cancer}
           </option>
         ))}
       </select>
@@ -47,11 +47,11 @@ export default function SchemesSelection(props) {
         name="select-regimen"
         onChange={handleSelectRegimen}
       >
-        <option disabled={isSelectRegimenDisabled}>Select Regimen</option>
+        <option disabled={isSelectRegimenDisabled}>Select Scheme</option>
         {selectedCancer &&
-          props.drugsList[selectedCancer].regimens.map((item, index) => (
-            <option key={item.id} value={index}>
-              {item.courseScheme}
+          props.drugsList[selectedCancer].map((drug, index) => (
+            <option key={drug.id} value={index}>
+              {drug.scheme}
             </option>
           ))}
       </select>

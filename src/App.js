@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { CoursesSchemes } from "./CoursesSchemes.js";
+import { CoursesSchemes } from "./CoursesSchemes_2.js";
 
 import PatientInfo from "./components/PatientInfo";
 import SchemesSelection from "./components/SchemesSelection";
