@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import { CoursesSchemes } from "./CoursesSchemes_2.js";
+import { CoursesSchemes } from "./CoursesSchemes.js";
 
 import PatientInfo from "./components/PatientInfo";
 import SchemesSelection from "./components/SchemesSelection";
@@ -36,10 +36,10 @@ export default function App() {
     setSelectedScheme({});
   };
 
-  const handleSelectRegiment = (cancerIndex, regimenIndex) => {
+  const handleSelectScheme = (cancerName, schemeID) => {
     setSelectedScheme({
-      cancer: Number(cancerIndex),
-      regimen: Number(regimenIndex),
+      cancer: cancerName,
+      id: schemeID,
     });
   };
 
@@ -54,7 +54,8 @@ export default function App() {
       <SchemesSelection
         patientInfo={patientInfo}
         drugsList={CoursesSchemes}
-        onSelectRegiment={handleSelectRegiment}
+        onSelectScheme={handleSelectScheme}
+        selectedScheme={selectedScheme}
       />
       <Results
         patientInfo={patientInfo}

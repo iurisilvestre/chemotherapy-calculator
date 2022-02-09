@@ -31,21 +31,20 @@ export default function Results(props) {
   };
 
   const getDose = (patientData, coursesSchemes, selectedScheme) => {
-    // if we have a selected scheme
+    // Check if we have a selected scheme
     if (Object.keys(selectedScheme).length > 0) {
       const result = [];
       let calc;
-
-      console.log(patientData, coursesSchemes, selectedScheme);
-      const scheme =
-        coursesSchemes[selectedScheme.cancer].regimens[selectedScheme.regimen];
-
+      const scheme = coursesSchemes[selectedScheme.cancer].find(
+        (scheme) => scheme.id == selectedScheme.id
+      );
+      // Check if the selected scheme needs bsa
       if (scheme.bsaCalc) {
         calc = bsaValue;
       } else {
         calc = patientData.weight;
       }
-
+      // Iterate throught drugdoses and make the calcs
       for (let i = 0; i < scheme.drugDoses.length; i++) {
         result.push({
           drug: scheme.drugDoses[i].drug,
@@ -75,10 +74,7 @@ export default function Results(props) {
       <h2>Results</h2>
       {doseValue &&
         doseValue.map((item, index) => (
-          <p key={index}>
-            {item.drug}
-            {item.dose}
-          </p>
+          <p key={index}>{`${item.drug} ${item.dose}`}</p>
         ))}
       <h3>BSA</h3>
       <p>{bsaValue || 0} m²</p>

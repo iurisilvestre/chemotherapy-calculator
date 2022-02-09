@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 export default function SchemesSelection(props) {
   const [selectedCancer, setSelectedCancer] = useState(null);
-  const [isSelectRegimenDisabled, setIsSelectRegimenDisabled] = useState(false);
+  const [isSelectSchemeDisabled, setIsSelectSchemeDisabled] = useState(false);
 
   const checkPatientData = (patientData) => {
     if (
@@ -21,10 +21,9 @@ export default function SchemesSelection(props) {
     setSelectedCancer(event.target.value);
   };
 
-  const handleSelectRegimen = (event) => {
-    setIsSelectRegimenDisabled(true);
-    const regimenIndex = event.target.value;
-    props.onSelectRegiment(selectedCancer, regimenIndex);
+  const handleSelectScheme = (event) => {
+    const schemeId = event.target.value;
+    props.onSelectScheme(selectedCancer, schemeId);
   };
 
   return (
@@ -44,13 +43,13 @@ export default function SchemesSelection(props) {
 
       <select
         disabled={!selectedCancer}
-        name="select-regimen"
-        onChange={handleSelectRegimen}
+        name="select-scheme"
+        onChange={handleSelectScheme}
       >
-        <option disabled={isSelectRegimenDisabled}>Select Scheme</option>
+        <option disabled={isSelectSchemeDisabled}>Select Scheme</option>
         {selectedCancer &&
-          props.drugsList[selectedCancer].map((drug, index) => (
-            <option key={drug.id} value={index}>
+          props.drugsList[selectedCancer].map((drug) => (
+            <option key={drug.id} value={drug.id}>
               {drug.scheme}
             </option>
           ))}
