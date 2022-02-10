@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 
 export default function SchemesSelection(props) {
-  const [isSelectSchemeDisabled, setIsSelectSchemeDisabled] = useState(false);
-
   const checkPatientData = (patientData) => {
     if (
       patientData.genre != "" &&
@@ -32,12 +30,13 @@ export default function SchemesSelection(props) {
         onChange={handleSelectCancer}
         disabled={!checkPatientData(props.patientInfo)}
       >
-        <option disabled={props.selectedCancer}>Select Cancer</option>
-        {Object.keys(props.drugsList).map((cancer, cancerIndex) => (
-          <option key={cancerIndex} value={cancer}>
-            {cancer}
-          </option>
-        ))}
+        <option hidden>Select Cancer</option>
+        {checkPatientData(props.patientInfo) &&
+          Object.keys(props.drugsList).map((cancer, cancerIndex) => (
+            <option key={cancerIndex} value={cancer}>
+              {cancer}
+            </option>
+          ))}
       </select>
 
       <select
@@ -45,7 +44,7 @@ export default function SchemesSelection(props) {
         name="select-scheme"
         onChange={handleSelectScheme}
       >
-        <option>Select Scheme</option>
+        <option hidden>Select Scheme</option>
         {props.selectedCancer &&
           props.drugsList[props.selectedCancer].map((drug) => (
             <option key={drug.id} value={drug.id}>
