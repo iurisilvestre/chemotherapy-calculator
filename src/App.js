@@ -20,6 +20,7 @@ export default function App() {
 
   const [patientInfo, setPatientInfo] = useState(patientCleanData);
   const [selectedScheme, setSelectedScheme] = useState({});
+  const [selectedCancer, setSelectedCancer] = useState(null);
 
   const handleInputs = (event) => {
     const { name, value, type } = event.target;
@@ -34,6 +35,11 @@ export default function App() {
   const handleReset = () => {
     setPatientInfo(patientCleanData);
     setSelectedScheme({});
+    setSelectedCancer(null);
+  };
+
+  const handleSelectCancer = (cancer) => {
+    setSelectedCancer(cancer);
   };
 
   const handleSelectScheme = (cancerName, schemeID) => {
@@ -55,7 +61,8 @@ export default function App() {
         patientInfo={patientInfo}
         drugsList={CoursesSchemes}
         onSelectScheme={handleSelectScheme}
-        selectedScheme={selectedScheme}
+        onSelectCancer={handleSelectCancer}
+        selectedCancer={selectedCancer}
       />
       <Results
         patientInfo={patientInfo}

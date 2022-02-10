@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 export default function SchemesSelection(props) {
-  const [selectedCancer, setSelectedCancer] = useState(null);
   const [isSelectSchemeDisabled, setIsSelectSchemeDisabled] = useState(false);
 
   const checkPatientData = (patientData) => {
@@ -18,12 +17,12 @@ export default function SchemesSelection(props) {
   };
 
   const handleSelectCancer = (event) => {
-    setSelectedCancer(event.target.value);
+    props.onSelectCancer(event.target.value);
   };
 
   const handleSelectScheme = (event) => {
     const schemeId = event.target.value;
-    props.onSelectScheme(selectedCancer, schemeId);
+    props.onSelectScheme(props.selectedCancer, schemeId);
   };
 
   return (
@@ -33,7 +32,7 @@ export default function SchemesSelection(props) {
         onChange={handleSelectCancer}
         disabled={!checkPatientData(props.patientInfo)}
       >
-        <option disabled={selectedCancer}>Select Cancer</option>
+        <option disabled={props.selectedCancer}>Select Cancer</option>
         {Object.keys(props.drugsList).map((cancer, cancerIndex) => (
           <option key={cancerIndex} value={cancer}>
             {cancer}
@@ -42,13 +41,13 @@ export default function SchemesSelection(props) {
       </select>
 
       <select
-        disabled={!selectedCancer}
+        disabled={!props.selectedCancer}
         name="select-scheme"
         onChange={handleSelectScheme}
       >
-        <option disabled={isSelectSchemeDisabled}>Select Scheme</option>
-        {selectedCancer &&
-          props.drugsList[selectedCancer].map((drug) => (
+        <option>Select Scheme</option>
+        {props.selectedCancer &&
+          props.drugsList[props.selectedCancer].map((drug) => (
             <option key={drug.id} value={drug.id}>
               {drug.scheme}
             </option>
