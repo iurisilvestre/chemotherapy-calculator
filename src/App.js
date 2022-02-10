@@ -21,6 +21,7 @@ export default function App() {
   const [patientInfo, setPatientInfo] = useState(patientCleanData);
   const [selectedScheme, setSelectedScheme] = useState({});
   const [selectedCancer, setSelectedCancer] = useState(null);
+  const [aucRequired, setAucRequired] = useState(false);
 
   const handleInputs = (event) => {
     const { name, value, type } = event.target;

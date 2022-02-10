@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 export default function Results(props) {
   const [crclValue, setCrclValue] = useState();
   const [bsaValue, setBsaValue] = useState();
+  const [carboplatinValue, setCarboplatinValue] = useState(null);
   const [doseValue, setDoseValue] = useState([]);
 
   const getBsa = (patientData) => {
@@ -38,12 +39,25 @@ export default function Results(props) {
       const scheme = coursesSchemes[selectedScheme.cancer].find(
         (scheme) => scheme.id == selectedScheme.id
       );
+      // Carboplatin calc if it is
+
+      if (scheme.carboplatinCalc && patientData.auc > 0) {
+        let crCl = crclValue;
+        if (crCl > 125) {
+          crCl = 125;
+        }
+        setCarboplatinValue(Math.round(patientData.auc * (crCl + 25)));
+      } else if (scheme.carboplatinCalc) {
+        console.log("carboplatin needed");
+      }
+
       // Check if the selected scheme needs bsa
       if (scheme.bsaCalc) {
         calc = bsaValue;
       } else {
         calc = patientData.weight;
       }
+
       // Iterate throught drugdoses and make the calcs
       for (let i = 0; i < scheme.drugDoses.length; i++) {
         result.push({
@@ -72,6 +86,7 @@ export default function Results(props) {
   return (
     <div className="results">
       <h2>Results</h2>
+      {carboplatinValue && <p>Carboplatin: {carboplatinValue}</p>}
       {doseValue &&
         doseValue.map((item, index) => (
           <p key={index}>{`${item.drug} ${item.dose}`}</p>
