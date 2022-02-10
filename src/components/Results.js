@@ -46,9 +46,10 @@ export default function Results(props) {
         if (crCl > 125) {
           crCl = 125;
         }
+        props.isAucRequired();
         setCarboplatinValue(Math.round(patientData.auc * (crCl + 25)));
       } else if (scheme.carboplatinCalc) {
-        console.log("carboplatin needed");
+        props.isAucRequired();
       }
 
       // Check if the selected scheme needs bsa

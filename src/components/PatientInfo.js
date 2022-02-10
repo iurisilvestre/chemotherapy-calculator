@@ -73,6 +73,7 @@ export default function PatientInfo(props) {
       <div>
         <label htmlFor="auc">AUC</label>
         <input
+          className={props.aucRequired ? "auc-required" : ""}
           type="number"
           name="auc"
           value={props.patientInfo.auc}

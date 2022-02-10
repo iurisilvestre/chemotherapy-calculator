@@ -37,6 +37,7 @@ export default function App() {
     setPatientInfo(patientCleanData);
     setSelectedScheme({});
     setSelectedCancer(null);
+    setAucRequired(false);
   };
 
   const handleSelectCancer = (cancer) => {
@@ -50,6 +51,10 @@ export default function App() {
     });
   };
 
+  const isAucRequired = () => {
+    setAucRequired((prev) => !prev);
+  };
+
   return (
     <div className="app">
       <h1>Chemotherapy Calculator</h1>
@@ -57,6 +62,7 @@ export default function App() {
         onChangeInputs={handleInputs}
         onReset={handleReset}
         patientInfo={patientInfo}
+        aucRequired={aucRequired}
       />
       <SchemesSelection
         patientInfo={patientInfo}
@@ -69,6 +75,7 @@ export default function App() {
         patientInfo={patientInfo}
         selectedScheme={selectedScheme}
         coursesSchemes={CoursesSchemes}
+        isAucRequired={isAucRequired}
       />
     </div>
   );
