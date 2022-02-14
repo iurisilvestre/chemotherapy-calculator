@@ -1,4 +1,4 @@
-import React from "react";
+import Input from "./Input";
 
 export default function PatientInfo(props) {
   return (
@@ -26,61 +26,55 @@ export default function PatientInfo(props) {
         <label htmlFor="female">Female</label>
       </div>
       {/* INPUTS AGE */}
-      <div>
-        <label htmlFor="age">Age</label>
-        <input
-          type="number"
-          name="age"
-          value={props.patientInfo.age}
-          min="0"
-          onChange={props.onChangeInputs}
-        />
-      </div>
+      <Input
+        label="Age"
+        htmlFor="age"
+        type="number"
+        name="age"
+        min="0"
+        onChange={props.onChangeInputs}
+        value={props.patientInfo.age || ""}
+      />
       {/* INPUTS HEIGHT */}
-      <div>
-        <label htmlFor="height">Height</label>
-        <input
-          type="number"
-          name="height"
-          value={props.patientInfo.height}
-          min="0"
-          onChange={props.onChangeInputs}
-        />
-      </div>
+      <Input
+        label="Height"
+        htmlFor="height"
+        type="number"
+        name="height"
+        min="0"
+        onChange={props.onChangeInputs}
+        value={props.patientInfo.height || ""}
+      />
       {/* INPUTS WEIGHT */}
-      <div>
-        <label htmlFor="weight">Weight</label>
-        <input
-          type="number"
-          name="weight"
-          value={props.patientInfo.weight}
-          min="0"
-          onChange={props.onChangeInputs}
-        />
-      </div>
+      <Input
+        label="Weight"
+        htmlFor="weight"
+        type="number"
+        name="weight"
+        min="0"
+        onChange={props.onChangeInputs}
+        value={props.patientInfo.weight || ""}
+      />
       {/* INPUTS CREATININE */}
-      <div>
-        <label htmlFor="creatinine">Creatinine</label>
-        <input
-          type="number"
-          name="creatinine"
-          value={props.patientInfo.creatinine}
-          min="0"
-          onChange={props.onChangeInputs}
-        />
-      </div>
+      <Input
+        label="Creatinine"
+        htmlFor="creatinine"
+        type="number"
+        name="creatinine"
+        min="0"
+        onChange={props.onChangeInputs}
+        value={props.patientInfo.creatinine || ""}
+      />
       {/* INPUTS AUC */}
-      <div>
-        <label htmlFor="auc">AUC</label>
-        <input
-          className={props.aucRequired ? "auc-required" : ""}
-          type="number"
-          name="auc"
-          value={props.patientInfo.auc}
-          min="0"
-          onChange={props.onChangeInputs}
-        />
-      </div>
+      <Input
+        label="AUC"
+        htmlFor="auc"
+        type="number"
+        name="auc"
+        min="0"
+        onChange={props.onChangeInputs}
+        value={props.patientInfo.auc || ""}
+      />
       <button type="button" onClick={props.onReset}>
         Reset
       </button>

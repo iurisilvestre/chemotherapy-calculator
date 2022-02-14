@@ -1,22 +1,13 @@
 import React, { useState } from "react";
 
-import { CoursesSchemes } from "./CoursesSchemes.js";
+import { CoursesSchemes } from "./utils/CoursesSchemes.js";
 
 import PatientInfo from "./components/PatientInfo";
 import SchemesSelection from "./components/SchemesSelection";
 import Results from "./components/Results";
 
-import "./App.css";
-
 export default function App() {
-  const patientCleanData = {
-    genre: "",
-    age: "",
-    height: "",
-    weight: "",
-    creatinine: "",
-    auc: "",
-  };
+  const patientCleanData = {};
 
   const [patientInfo, setPatientInfo] = useState(patientCleanData);
   const [selectedScheme, setSelectedScheme] = useState({});
@@ -34,7 +25,7 @@ export default function App() {
   };
 
   const handleReset = () => {
-    setPatientInfo(patientCleanData);
+    setPatientInfo({});
     setSelectedScheme({});
     setSelectedCancer(null);
     setAucRequired(false);

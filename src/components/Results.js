@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 
 export default function Results(props) {
-  const [crclValue, setCrclValue] = useState();
-  const [bsaValue, setBsaValue] = useState();
+  const [crclValue, setCrclValue] = useState(null);
+  const [bsaValue, setBsaValue] = useState(null);
   const [carboplatinValue, setCarboplatinValue] = useState(null);
   const [doseValue, setDoseValue] = useState([]);
 
