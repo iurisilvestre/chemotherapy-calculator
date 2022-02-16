@@ -1,18 +1,30 @@
-import React, { useState } from "react";
+import { useState, useEffect } from "react";
 
 import { CoursesSchemes } from "./utils/CoursesSchemes.js";
+import { getBsa, getCrCl, getCarboplatin, getDose } from "./utils/functions.js";
 
-import PatientInfo from "./components/PatientInfo";
-import SchemesSelection from "./components/SchemesSelection";
-import Results from "./components/Results";
+import PatientInfo from "./layouts/PatientInfo";
+import SchemesSelection from "./layouts/SchemesSelection";
+import Results from "./layouts/Results";
 
 export default function App() {
-  const patientCleanData = {};
+  const patientCleanData = {
+    genre: "",
+    age: "",
+    height: "",
+    weight: "",
+    creatinine: "",
+    auc: "",
+  };
 
   const [patientInfo, setPatientInfo] = useState(patientCleanData);
   const [selectedScheme, setSelectedScheme] = useState({});
   const [selectedCancer, setSelectedCancer] = useState(null);
   const [aucRequired, setAucRequired] = useState(false);
+  const [crclValue, setCrclValue] = useState(null);
+  const [bsaValue, setBsaValue] = useState(null);
+  const [carboplatinValue, setCarboplatinValue] = useState(null);
+  const [doseValue, setDoseValue] = useState([]);
 
   const handleInputs = (event) => {
     const { name, value, type } = event.target;
@@ -25,7 +37,7 @@ export default function App() {
   };
 
   const handleReset = () => {
-    setPatientInfo({});
+    setPatientInfo(patientCleanData);
     setSelectedScheme({});
     setSelectedCancer(null);
     setAucRequired(false);
@@ -46,6 +58,23 @@ export default function App() {
     setAucRequired((prev) => !prev);
   };
 
+  useEffect(() => {
+    setBsaValue(getBsa(patientInfo));
+    setCrclValue(getCrCl(patientInfo));
+    setDoseValue(
+      getDose(patientInfo, CoursesSchemes, selectedScheme, bsaValue)
+    );
+  }, [patientInfo]);
+
+  useEffect(() => {
+    setDoseValue(
+      getDose(patientInfo, CoursesSchemes, selectedScheme, bsaValue)
+    );
+    setCarboplatinValue(
+      getCarboplatin(patientInfo, CoursesSchemes, selectedScheme, crclValue)
+    );
+  }, [selectedScheme, patientInfo.auc]);
+
   return (
     <div className="app">
       <h1>Chemotherapy Calculator</h1>
@@ -63,10 +92,10 @@ export default function App() {
         selectedCancer={selectedCancer}
       />
       <Results
-        patientInfo={patientInfo}
-        selectedScheme={selectedScheme}
-        coursesSchemes={CoursesSchemes}
-        isAucRequired={isAucRequired}
+        bsaValue={bsaValue}
+        crclValue={crclValue}
+        carboplatinValue={carboplatinValue}
+        doseValue={doseValue}
       />
     </div>
   );

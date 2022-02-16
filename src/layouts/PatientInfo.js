@@ -1,4 +1,4 @@
-import Input from "./Input";
+import Input from "../components/Input";
 
 export default function PatientInfo(props) {
   return (
@@ -33,7 +33,7 @@ export default function PatientInfo(props) {
         name="age"
         min="0"
         onChange={props.onChangeInputs}
-        value={props.patientInfo.age || ""}
+        value={props.patientInfo.age}
       />
       {/* INPUTS HEIGHT */}
       <Input
@@ -43,7 +43,7 @@ export default function PatientInfo(props) {
         name="height"
         min="0"
         onChange={props.onChangeInputs}
-        value={props.patientInfo.height || ""}
+        value={props.patientInfo.height}
       />
       {/* INPUTS WEIGHT */}
       <Input
@@ -53,7 +53,7 @@ export default function PatientInfo(props) {
         name="weight"
         min="0"
         onChange={props.onChangeInputs}
-        value={props.patientInfo.weight || ""}
+        value={props.patientInfo.weight}
       />
       {/* INPUTS CREATININE */}
       <Input
@@ -61,9 +61,9 @@ export default function PatientInfo(props) {
         htmlFor="creatinine"
         type="number"
         name="creatinine"
-        min="0"
+        min="-10"
         onChange={props.onChangeInputs}
-        value={props.patientInfo.creatinine || ""}
+        value={props.patientInfo.creatinine}
       />
       {/* INPUTS AUC */}
       <Input
@@ -73,7 +73,7 @@ export default function PatientInfo(props) {
         name="auc"
         min="0"
         onChange={props.onChangeInputs}
-        value={props.patientInfo.auc || ""}
+        value={props.patientInfo.auc}
       />
       <button type="button" onClick={props.onReset}>
         Reset

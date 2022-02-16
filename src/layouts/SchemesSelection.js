@@ -1,19 +1,6 @@
-import React from "react";
+import { checkPatientData } from "../utils/functions";
 
 export default function SchemesSelection(props) {
-  const checkPatientData = (patientData) => {
-    if (
-      patientData.genre != "" &&
-      patientData.age > 0 &&
-      patientData.height > 0 &&
-      patientData.weight > 0 &&
-      patientData.creatinine > 0
-    ) {
-      return true;
-    }
-    return false;
-  };
-
   const handleSelectCancer = (event) => {
     props.onSelectCancer(event.target.value);
   };
@@ -39,11 +26,7 @@ export default function SchemesSelection(props) {
           ))}
       </select>
 
-      <select
-        disabled={!props.selectedCancer}
-        name="select-scheme"
-        onChange={handleSelectScheme}
-      >
+      <select disabled={!props.selectedCancer} onChange={handleSelectScheme}>
         <option hidden>Select Scheme</option>
         {props.selectedCancer &&
           props.drugsList[props.selectedCancer].map((drug) => (
