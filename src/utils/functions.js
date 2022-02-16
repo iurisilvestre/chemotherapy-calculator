@@ -79,5 +79,7 @@ export function getCarboplatin(
       }
       return Math.round(patientData.auc * (crCl + 25));
     }
+  } else {
+    return null;
   }
 }

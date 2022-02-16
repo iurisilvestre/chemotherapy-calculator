@@ -54,10 +54,6 @@ export default function App() {
     });
   };
 
-  const isAucRequired = () => {
-    setAucRequired((prev) => !prev);
-  };
-
   useEffect(() => {
     setBsaValue(getBsa(patientInfo));
     setCrclValue(getCrCl(patientInfo));

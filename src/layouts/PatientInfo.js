@@ -74,6 +74,7 @@ export default function PatientInfo(props) {
         min="0"
         onChange={props.onChangeInputs}
         value={props.patientInfo.auc}
+        aucRequired={props.aucRequired}
       />
       <button type="button" onClick={props.onReset}>
         Reset
