@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { checkPatientData } from "../utils/functions";
+import SelectBox from "../components/SelectBox";
 
 export default function SchemesSelection(props) {
   const handleSelectCancer = (event) => {
@@ -13,28 +15,20 @@ export default function SchemesSelection(props) {
   return (
     <div className="course-schemes">
       <h2>2. Select Course Scheme</h2>
-      <select
-        onChange={handleSelectCancer}
+      <SelectBox
+        label={"Select Cancer"}
+        onSelect={handleSelectCancer}
         disabled={!checkPatientData(props.patientInfo)}
-      >
-        <option hidden>Select Cancer</option>
-        {checkPatientData(props.patientInfo) &&
-          Object.keys(props.drugsList).map((cancer, cancerIndex) => (
-            <option key={cancerIndex} value={cancer}>
-              {cancer}
-            </option>
-          ))}
-      </select>
-
-      <select disabled={!props.selectedCancer} onChange={handleSelectScheme}>
-        <option hidden>Select Scheme</option>
-        {props.selectedCancer &&
-          props.drugsList[props.selectedCancer].map((drug) => (
-            <option key={drug.id} value={drug.id}>
-              {drug.scheme}
-            </option>
-          ))}
-      </select>
+        renderCondition={checkPatientData(props.patientInfo)}
+        optionsList={Object.keys(props.drugsList)}
+      />
+      <SelectBox
+        label={"Select Scheme"}
+        disabled={!props.selectedCancer}
+        onSelect={handleSelectScheme}
+        renderCondition={props.selectedCancer}
+        optionsList={props.drugsList[props.selectedCancer]}
+      />
     </div>
   );
 }

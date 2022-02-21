@@ -1,6 +1,4 @@
 export default function Input(props) {
-  console.log(props.aucRequired);
-
   return (
     <div>
       <label htmlFor={props.htmlFor}>{props.label}</label>
