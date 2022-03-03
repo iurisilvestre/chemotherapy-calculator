@@ -1,21 +1,34 @@
 import { useState, useEffect } from "react";
 
+// COMPONENTS
 import { CoursesSchemes } from "./utils/CoursesSchemes.js";
 import { getBsa, getCrCl, getCarboplatin, getDose } from "./utils/functions.js";
-
 import PatientInfo from "./layouts/PatientInfo";
 import SchemesSelection from "./layouts/SchemesSelection";
 import Results from "./layouts/Results";
 
+// MATERIAL-UI
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  title: {
+    marginTop: "20px 0",
+  },
+});
+
+const patientCleanData = {
+  genre: "",
+  age: "",
+  height: "",
+  weight: "",
+  creatinine: "",
+  auc: "",
+};
 export default function App() {
-  const patientCleanData = {
-    genre: "",
-    age: "",
-    height: "",
-    weight: "",
-    creatinine: "",
-    auc: "",
-  };
+  const classes = useStyles();
 
   const [patientInfo, setPatientInfo] = useState(patientCleanData);
   const [selectedScheme, setSelectedScheme] = useState({});
@@ -72,27 +85,42 @@ export default function App() {
   }, [selectedScheme, patientInfo.auc]);
 
   return (
-    <div className="app">
-      <h1>Chemotherapy Calculator</h1>
-      <PatientInfo
-        onChangeInputs={handleInputs}
-        onReset={handleReset}
-        patientInfo={patientInfo}
-        aucRequired={aucRequired}
-      />
-      <SchemesSelection
-        patientInfo={patientInfo}
-        drugsList={CoursesSchemes}
-        onSelectScheme={handleSelectScheme}
-        onSelectCancer={handleSelectCancer}
-        selectedCancer={selectedCancer}
-      />
-      <Results
-        bsaValue={bsaValue}
-        crclValue={crclValue}
-        carboplatinValue={carboplatinValue}
-        doseValue={doseValue}
-      />
-    </div>
+    <Container maxWidth="sm">
+      <Typography
+        variant="h4"
+        align="center"
+        sx={{ color: "white", fontWeight: "500", margin: "2rem 0" }}
+        className={classes.title}
+      >
+        Chemotherapy Calculator
+      </Typography>
+      <Box
+        sx={{
+          backgroundColor: "white",
+          padding: "4rem",
+          borderRadius: "2rem",
+        }}
+      >
+        <PatientInfo
+          onChangeInputs={handleInputs}
+          onReset={handleReset}
+          patientInfo={patientInfo}
+          aucRequired={aucRequired}
+        />
+        <SchemesSelection
+          patientInfo={patientInfo}
+          drugsList={CoursesSchemes}
+          onSelectScheme={handleSelectScheme}
+          onSelectCancer={handleSelectCancer}
+          selectedCancer={selectedCancer}
+        />
+        <Results
+          bsaValue={bsaValue}
+          crclValue={crclValue}
+          carboplatinValue={carboplatinValue}
+          doseValue={doseValue}
+        />
+      </Box>
+    </Container>
   );
 }

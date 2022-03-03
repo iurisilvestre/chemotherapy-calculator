@@ -1,50 +1,17 @@
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
 }
 
 body {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+  height: 100vh;
   font-family: "Roboto";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.app {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  grid-template-rows: 1fr 2fr 2fr;
-  grid-gap: 1rem;
-}
-
-h1 {
-  align-self: center;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  text-align: center;
-}
-
-.patient-info {
-  width: 100%;
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-
-.course-schemes {
-  grid-column-start: 2;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: 3;
-}
-
-.results {
-  grid-column-start: 2;
-  grid-column-end: 3;
-}
-
-.auc-required {
-  border: 2px solid red;
+  background: linear-gradient(
+    335deg,
+    rgb(4, 100, 138) 46%,
+    rgb(87, 200, 231) 100%
+  );
 }
