@@ -1,9 +1,12 @@
-import Input from "../components/Input";
+import Input from "../../components/Input";
+import Typography from "@mui/material/Typography";
+
+import IconButton from "@mui/material/IconButton";
 
 export default function PatientInfo(props) {
   return (
-    <div className="patient-info">
-      <h2>1. Insert Patient Info</h2>
+    <div style={{ width: "200px" }}>
+      <Typography variant="h6">1. Insert Patient Info</Typography>
       {/* INPUTS GENRE */}
       <div>
         <input
@@ -28,50 +31,40 @@ export default function PatientInfo(props) {
       {/* INPUTS AGE */}
       <Input
         label="Age"
-        htmlFor="age"
-        type="number"
         name="age"
-        min="0"
+        adornment="years"
         onChange={props.onChangeInputs}
         value={props.patientInfo.age}
       />
       {/* INPUTS HEIGHT */}
       <Input
         label="Height"
-        htmlFor="height"
-        type="number"
         name="height"
-        min="0"
+        adornment="cm"
         onChange={props.onChangeInputs}
         value={props.patientInfo.height}
       />
       {/* INPUTS WEIGHT */}
       <Input
         label="Weight"
-        htmlFor="weight"
-        type="number"
         name="weight"
-        min="0"
+        adornment="kg"
         onChange={props.onChangeInputs}
         value={props.patientInfo.weight}
       />
       {/* INPUTS CREATININE */}
       <Input
         label="Creatinine"
-        htmlFor="creatinine"
-        type="number"
         name="creatinine"
-        min="-10"
+        adornment="mg/dL"
         onChange={props.onChangeInputs}
         value={props.patientInfo.creatinine}
       />
       {/* INPUTS AUC */}
       <Input
         label="AUC"
-        htmlFor="auc"
-        type="number"
         name="auc"
-        min="0"
+        adornment="mL*min/mL"
         onChange={props.onChangeInputs}
         value={props.patientInfo.auc}
         aucRequired={props.aucRequired}

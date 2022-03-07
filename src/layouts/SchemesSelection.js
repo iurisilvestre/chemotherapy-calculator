@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { checkPatientData } from "../utils/functions";
 import SelectBox from "../components/SelectBox";
 

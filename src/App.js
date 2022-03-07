@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // COMPONENTS
 import { CoursesSchemes } from "./utils/CoursesSchemes.js";
 import { getBsa, getCrCl, getCarboplatin, getDose } from "./utils/functions.js";
-import PatientInfo from "./layouts/PatientInfo";
+import PatientInfo from "./layouts/PatientInfo/PatientInfo";
 import SchemesSelection from "./layouts/SchemesSelection";
 import Results from "./layouts/Results";
 
@@ -13,12 +13,6 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  title: {
-    marginTop: "20px 0",
-  },
-});
-
 const patientCleanData = {
   genre: "",
   age: "",
@@ -27,6 +21,22 @@ const patientCleanData = {
   creatinine: "",
   auc: "",
 };
+
+const useStyles = makeStyles({
+  title: {
+    color: "white",
+    fontWeight: "500",
+    margin: "2rem 0",
+    marginTop: "20px 0",
+  },
+  container: {
+    backgroundColor: "white",
+    padding: "4rem",
+    borderRadius: "2rem",
+    display: "flex",
+  },
+});
+
 export default function App() {
   const classes = useStyles();
 
@@ -85,41 +95,33 @@ export default function App() {
   }, [selectedScheme, patientInfo.auc]);
 
   return (
-    <Container maxWidth="sm">
-      <Typography
-        variant="h4"
-        align="center"
-        sx={{ color: "white", fontWeight: "500", margin: "2rem 0" }}
-        className={classes.title}
-      >
+    <Container maxWidth="md">
+      <Typography variant="h4" align="center" className={classes.title}>
         Chemotherapy Calculator
       </Typography>
-      <Box
-        sx={{
-          backgroundColor: "white",
-          padding: "4rem",
-          borderRadius: "2rem",
-        }}
-      >
+      <Box className={classes.container}>
         <PatientInfo
+          style={{ width: "45%" }}
           onChangeInputs={handleInputs}
           onReset={handleReset}
           patientInfo={patientInfo}
           aucRequired={aucRequired}
         />
-        <SchemesSelection
-          patientInfo={patientInfo}
-          drugsList={CoursesSchemes}
-          onSelectScheme={handleSelectScheme}
-          onSelectCancer={handleSelectCancer}
-          selectedCancer={selectedCancer}
-        />
-        <Results
-          bsaValue={bsaValue}
-          crclValue={crclValue}
-          carboplatinValue={carboplatinValue}
-          doseValue={doseValue}
-        />
+        <div style={{ width: "55%" }}>
+          <SchemesSelection
+            patientInfo={patientInfo}
+            drugsList={CoursesSchemes}
+            onSelectScheme={handleSelectScheme}
+            onSelectCancer={handleSelectCancer}
+            selectedCancer={selectedCancer}
+          />
+          <Results
+            bsaValue={bsaValue}
+            crclValue={crclValue}
+            carboplatinValue={carboplatinValue}
+            doseValue={doseValue}
+          />
+        </div>
       </Box>
     </Container>
   );

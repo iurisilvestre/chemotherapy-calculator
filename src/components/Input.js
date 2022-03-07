@@ -1,15 +1,22 @@
+import { TextField, InputAdornment } from "@mui/material";
+
 export default function Input(props) {
   return (
-    <div>
-      <label htmlFor={props.htmlFor}>{props.label}</label>
-      <input
-        value={props.value}
-        type={props.type}
-        name={props.name}
-        min={props.min}
-        onChange={props.onChange}
-        className={`${props.aucRequired ? "auc-required" : ""}`}
-      />
-    </div>
+    <TextField
+      name={props.name}
+      label={props.label}
+      value={props.value}
+      onChange={props.onChange}
+      fullWidth
+      variant="outlined"
+      margin="dense"
+      size="small"
+      className={`${props.aucRequired ? "auc-required" : ""}`}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">{props.adornment}</InputAdornment>
+        ),
+      }}
+    ></TextField>
   );
 }
