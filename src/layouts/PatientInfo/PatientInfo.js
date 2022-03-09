@@ -1,33 +1,54 @@
 import Input from "../../components/Input";
-import Typography from "@mui/material/Typography";
 
+//MUI
+import Typography from "@mui/material/Typography";
+import ToggleButton from "@mui/material/ToggleButton";
+import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import IconButton from "@mui/material/IconButton";
+import { makeStyles } from "@mui/styles";
+import RestartAlt from "@mui/icons-material/RestartAlt";
+
+const useStyles = makeStyles({
+  patientInfo: {
+    width: "35%",
+    marginRight: "4rem",
+  },
+  toggleButtonGroup: {
+    width: "100%",
+    marginTop: "1rem",
+  },
+  toggleButton: {
+    width: "50%",
+  },
+});
 
 export default function PatientInfo(props) {
+  const classes = useStyles();
   return (
-    <div style={{ width: "200px" }}>
+    <div className={classes.patientInfo}>
       <Typography variant="h6">1. Insert Patient Info</Typography>
       {/* INPUTS GENRE */}
-      <div>
-        <input
-          type="radio"
-          name="genre"
+      <ToggleButtonGroup
+        className={classes.toggleButtonGroup}
+        onChange={props.onChangeInputs}
+      >
+        <ToggleButton
           value="male"
-          checked={props.patientInfo.genre === "male"}
-          onChange={props.onChangeInputs}
-        />
-        <label htmlFor="male">Male</label>
-      </div>
-      <div>
-        <input
-          type="radio"
           name="genre"
+          selected={props.patientInfo.genre === "male"}
+          className={classes.toggleButton}
+        >
+          Male
+        </ToggleButton>
+        <ToggleButton
           value="female"
-          checked={props.patientInfo.genre === "female"}
-          onChange={props.onChangeInputs}
-        />
-        <label htmlFor="female">Female</label>
-      </div>
+          name="genre"
+          selected={props.patientInfo.genre === "female"}
+          className={classes.toggleButton}
+        >
+          female
+        </ToggleButton>
+      </ToggleButtonGroup>
       {/* INPUTS AGE */}
       <Input
         label="Age"
@@ -55,6 +76,7 @@ export default function PatientInfo(props) {
       {/* INPUTS CREATININE */}
       <Input
         label="Creatinine"
+        ls
         name="creatinine"
         adornment="mg/dL"
         onChange={props.onChangeInputs}
@@ -69,9 +91,9 @@ export default function PatientInfo(props) {
         value={props.patientInfo.auc}
         aucRequired={props.aucRequired}
       />
-      <button type="button" onClick={props.onReset}>
-        Reset
-      </button>
+      <IconButton onClick={props.onReset} fontSize="large">
+        <RestartAlt />
+      </IconButton>
     </div>
   );
 }

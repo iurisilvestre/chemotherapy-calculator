@@ -12,6 +12,7 @@ export default function Input(props) {
       margin="dense"
       size="small"
       className={`${props.aucRequired ? "auc-required" : ""}`}
+      inputProps={{ style: { height: 40 } }}
       InputProps={{
         endAdornment: (
           <InputAdornment position="end">{props.adornment}</InputAdornment>

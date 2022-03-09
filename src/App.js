@@ -23,17 +23,19 @@ const patientCleanData = {
 };
 
 const useStyles = makeStyles({
-  title: {
-    color: "white",
-    fontWeight: "500",
-    margin: "2rem 0",
-    marginTop: "20px 0",
-  },
   container: {
     backgroundColor: "white",
     padding: "4rem",
     borderRadius: "2rem",
     display: "flex",
+    maxWidth: "45rem",
+    margin: "0 auto",
+  },
+  title: {
+    color: "white",
+    fontWeight: "500",
+    margin: "4rem 0",
+    marginTop: "20px 0",
   },
 });
 
@@ -51,6 +53,7 @@ export default function App() {
 
   const handleInputs = (event) => {
     const { name, value, type } = event.target;
+
     setPatientInfo((prevFormData) => {
       return {
         ...prevFormData,
@@ -95,19 +98,27 @@ export default function App() {
   }, [selectedScheme, patientInfo.auc]);
 
   return (
-    <Container maxWidth="md">
-      <Typography variant="h4" align="center" className={classes.title}>
+    <Container>
+      <Typography
+        variant="h4"
+        align="center"
+        sx={{
+          color: "white",
+          fontWeight: "500",
+          margin: "2rem 0",
+          marginTop: "20px 0",
+        }}
+      >
         Chemotherapy Calculator
       </Typography>
       <Box className={classes.container}>
         <PatientInfo
-          style={{ width: "45%" }}
           onChangeInputs={handleInputs}
           onReset={handleReset}
           patientInfo={patientInfo}
           aucRequired={aucRequired}
         />
-        <div style={{ width: "55%" }}>
+        <div>
           <SchemesSelection
             patientInfo={patientInfo}
             drugsList={CoursesSchemes}
