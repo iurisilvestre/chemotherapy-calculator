@@ -1,7 +1,10 @@
+//MUI
+import Typography from "@mui/material/Typography";
+
 export default function Results(props) {
   return (
     <div className="results">
-      <h2>Results</h2>
+      <Typography variant="h6">Results</Typography>
       {props.carboplatinValue && <p>Carboplatin: {props.carboplatinValue}</p>}
       {props.doseValue &&
         props.doseValue.map((item, index) => (

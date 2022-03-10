@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 
 // COMPONENTS
 import { CoursesSchemes } from "./utils/CoursesSchemes.js";
-import { getBsa, getCrCl, getCarboplatin, getDose } from "./utils/functions.js";
+import { getBsa, getCrCl, getCarboplatin, getDose } from "./utils/functions";
 import PatientInfo from "./layouts/PatientInfo/PatientInfo";
-import SchemesSelection from "./layouts/SchemesSelection";
-import Results from "./layouts/Results";
+import SchemesSelection from "./layouts/SchemesSelection/SchemesSelection";
+import Results from "./layouts/Results/Results";
 
 // MATERIAL-UI
 import Container from "@mui/material/Container";
@@ -25,7 +25,7 @@ const patientCleanData = {
 const useStyles = makeStyles({
   container: {
     backgroundColor: "white",
-    padding: "4rem",
+    padding: "2.5rem",
     borderRadius: "2rem",
     display: "flex",
     maxWidth: "45rem",
@@ -118,7 +118,7 @@ export default function App() {
           patientInfo={patientInfo}
           aucRequired={aucRequired}
         />
-        <div>
+        <div style={{ width: "65%" }}>
           <SchemesSelection
             patientInfo={patientInfo}
             drugsList={CoursesSchemes}

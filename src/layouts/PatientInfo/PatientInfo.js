@@ -5,8 +5,8 @@ import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import IconButton from "@mui/material/IconButton";
-import { makeStyles } from "@mui/styles";
 import RestartAlt from "@mui/icons-material/RestartAlt";
+import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
   patientInfo: {
@@ -20,6 +20,9 @@ const useStyles = makeStyles({
   toggleButton: {
     width: "50%",
   },
+  icon: {
+    padding: 2,
+  },
 });
 
 export default function PatientInfo(props) {
@@ -29,7 +32,7 @@ export default function PatientInfo(props) {
       <Typography variant="h6">1. Insert Patient Info</Typography>
       {/* INPUTS GENRE */}
       <ToggleButtonGroup
-        className={classes.toggleButtonGroup}
+        classes={{ root: classes.toggleButtonGroup }}
         onChange={props.onChangeInputs}
       >
         <ToggleButton
@@ -91,7 +94,11 @@ export default function PatientInfo(props) {
         value={props.patientInfo.auc}
         aucRequired={props.aucRequired}
       />
-      <IconButton onClick={props.onReset} fontSize="large">
+      <IconButton
+        onClick={props.onReset}
+        fontSize="large"
+        className={classes.icon}
+      >
         <RestartAlt />
       </IconButton>
     </div>

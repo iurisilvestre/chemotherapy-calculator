@@ -30,7 +30,7 @@ export const CoursesSchemes = {
     },
     {
       id: "BC003",
-      scheme: "Carboplatin + Paclitaxel 80mg/m²Paclitaxel 80mg/m²",
+      scheme: "Carboplatin + Paclitaxel 80mg/m²",
       drugDoses: [
         {
           drug: "Paclitaxel",
