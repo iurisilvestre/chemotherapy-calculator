@@ -10,11 +10,16 @@ const useStyles = makeStyles({
   },
   resultBox: {
     width: "100%",
-    height: "7rem",
+    height: "8rem",
     backgroundColor: "#fafafa",
     borderRadius: "0.2rem",
     border: "1px solid lightgrey",
     padding: "0.8rem",
+  },
+  otherResultsContainer: {
+    display: "flex",
+    marginTop: "0.8rem",
+    justifyContent: "space-between",
   },
 });
 
@@ -33,8 +38,10 @@ export default function Results(props) {
             <p key={index}>{`${item.drug}: ${item.dose} mg`}</p>
           ))}
       </div>
-      <OtherResult bsaValue={props.bsaValue} name={"BSA"} />
-      <OtherResult bsaValue={props.crclValue} name={"CrCl"} />
+      <div className={classes.otherResultsContainer}>
+        <OtherResult displayValue={props.bsaValue} name={"BSA"} />
+        <OtherResult displayValue={props.crclValue} name={"CrCl"} />
+      </div>
     </div>
   );
 }
