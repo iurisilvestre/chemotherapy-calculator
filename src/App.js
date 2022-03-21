@@ -33,7 +33,7 @@ export default function App() {
   const [doseValue, setDoseValue] = useState([]);
   const [aucRequired, setAucRequired] = useState(false);
 
-  console.log(Object.keys(selectedScheme).length);
+  console.log();
   const handleInputs = (event) => {
     const { name, value, type } = event.target;
 
