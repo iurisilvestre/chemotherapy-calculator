@@ -1,15 +1,9 @@
 import { checkPatientData } from "../../utils/functions";
 import SelectBox from "../../components/SelectBox";
+import useStyles from "./styles";
 
 //MUI
 import Typography from "@mui/material/Typography";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles({
-  schemesSelection: {
-    width: "65%",
-  },
-});
 
 export default function SchemesSelection(props) {
   const classes = useStyles();
@@ -21,7 +15,6 @@ export default function SchemesSelection(props) {
     const schemeId = event.target.value;
     props.onSelectScheme(props.selectedCancer, schemeId);
   };
-  console.log(props.selectedCancer);
   return (
     <div>
       <Typography variant="h6">2. Select Course Scheme</Typography>

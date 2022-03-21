@@ -68,7 +68,8 @@ export function getCarboplatin(
   selectedScheme,
   crclValue
 ) {
-  if (patientData.auc > 0) {
+  const hasSelectedCheme = Object.keys(selectedScheme).length;
+  if (patientData.auc > 0 && hasSelectedCheme) {
     const scheme = coursesSchemes[selectedScheme.cancer].find(
       (scheme) => scheme.id === selectedScheme.id
     );

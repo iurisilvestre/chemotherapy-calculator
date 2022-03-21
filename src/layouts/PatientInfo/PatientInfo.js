@@ -1,4 +1,5 @@
 import Input from "../../components/Input";
+import useStyles from "./styles";
 
 //MUI
 import Typography from "@mui/material/Typography";
@@ -6,24 +7,6 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import IconButton from "@mui/material/IconButton";
 import RestartAlt from "@mui/icons-material/RestartAlt";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles({
-  patientInfo: {
-    width: "35%",
-    marginRight: "4rem",
-  },
-  toggleButtonGroup: {
-    width: "100%",
-    marginTop: "1rem",
-  },
-  toggleButton: {
-    width: "50%",
-  },
-  icon: {
-    padding: 2,
-  },
-});
 
 export default function PatientInfo(props) {
   const classes = useStyles();
@@ -92,7 +75,6 @@ export default function PatientInfo(props) {
         adornment="mL*min/mL"
         onChange={props.onChangeInputs}
         value={props.patientInfo.auc}
-        aucRequired={props.aucRequired}
       />
       <IconButton
         onClick={props.onReset}
