@@ -1,17 +1,15 @@
-import { useState, useEffect } from "react";
-import useStyles from "./styles.js";
-import { getBsa, getCrCl, getCarboplatin, getDose } from "./utils/functions";
+import { useEffect, useState } from "react";
+import useStyles from "./styles";
+import { CoursesSchemes } from "./utils/CoursesSchemes";
+import { getBsa, getCarboplatin, getCrCl, getDose } from "./utils/functions";
 
 // COMPONENTS
-import { CoursesSchemes } from "./utils/CoursesSchemes.js";
 import PatientInfo from "./layouts/PatientInfo/PatientInfo";
-import SchemesSelection from "./layouts/SchemesSelection/SchemesSelection";
 import Results from "./layouts/Results/Results";
+import SchemesSelection from "./layouts/SchemesSelection/SchemesSelection";
 
-// MATERIAL-UI
-import Container from "@mui/material/Container";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
+// MUI
+import { Box, Container, Typography } from "@mui/material";
 
 const patientCleanData = {
   genre: "",
@@ -24,7 +22,7 @@ const patientCleanData = {
 
 export default function App() {
   const classes = useStyles();
-  const [patientInfo, setPatientInfo] = useState(patientCleanData);
+  const [patientInfo, setPatientInfo] = useState({});
   const [selectedScheme, setSelectedScheme] = useState({});
   const [selectedCancer, setSelectedCancer] = useState(null);
   const [crclValue, setCrclValue] = useState(null);
@@ -33,7 +31,6 @@ export default function App() {
   const [doseValue, setDoseValue] = useState([]);
   const [aucRequired, setAucRequired] = useState(false);
 
-  console.log();
   const handleInputs = (event) => {
     const { name, value, type } = event.target;
 
